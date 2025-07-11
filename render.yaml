@@ -24,3 +24,13 @@ services:
         sync: false
       - key: HUGGINGFACE_TOKEN
         sync: false
+
+  - type: web
+    name: ai-travel-agent-frontend
+    env: static
+    plan: free
+    buildCommand: echo "Frontend files ready"
+    staticPublishPath: ./frontend
+    envVars:
+      - key: RENDER
+        value: true

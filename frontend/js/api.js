@@ -4,10 +4,10 @@ class APIService {
     // Use environment-based URL or fallback to localhost for development
     this.baseURL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
       ? "http://localhost:8000" 
-      : `https://${window.location.hostname.replace('frontend', 'backend')}`;
+      : "https://aitravelagent.onrender.com";
     
     // For Render deployment, you can also set this explicitly
-    // this.baseURL = "https://ai-travel-agent-backend.onrender.com";
+    // this.baseURL = "https://aitravelagent.onrender.com";
     this.endpoints = {
       upload: "/api/upload-photo",
       destinations: "/api/destinations",
