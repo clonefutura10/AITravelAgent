@@ -467,10 +467,10 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Flight search response:", data);
 
         if (data.success && data.flights && data.flights.length > 0) {
-          console.log(`Found ${data.flights.length} flights from Amadeus API`);
+          console.log(`Found ${data.flights.length} flights from ${data.provider || 'API'}`);
           displayResults(type, data.flights);
           showToast(
-            `Found ${data.flights.length} flight options! (Amadeus API)`,
+            `Found ${data.flights.length} flight options! (${data.provider || 'API'})`,
             "success"
           );
         } else {
@@ -590,12 +590,30 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function getFlightSearchData() {
-    // Format data specifically for the Amadeus API
+    // Get raw input values
+    const originInput = document.getElementById("flight-from")?.value || "";
+    const destinationInput = document.getElementById("flight-to")?.value || "";
+    
+    // Extract airport codes (handle formats like "JFK - New York" -> "JFK")
+    let origin = originInput.toUpperCase();
+    let destination = destinationInput.toUpperCase();
+    
+    // Extract 3-letter airport codes
+    if (origin.includes(" - ")) {
+      origin = origin.split(" - ")[0].trim();
+    }
+    if (destination.includes(" - ")) {
+      destination = destination.split(" - ")[0].trim();
+    }
+    
+    // Validate airport codes (must be 3 letters)
+    if (origin.length !== 3 || destination.length !== 3) {
+      console.warn(`Invalid airport codes: ${origin} -> ${destination}`);
+    }
+    
     const data = {
-      origin:
-        document.getElementById("flight-from")?.value?.toUpperCase() || "",
-      destination:
-        document.getElementById("flight-to")?.value?.toUpperCase() || "",
+      origin: origin,
+      destination: destination,
       departure_date: document.getElementById("flight-depart")?.value || "",
       return_date: document.getElementById("flight-return")?.value || null,
       adults: parseInt(

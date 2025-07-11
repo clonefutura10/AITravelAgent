@@ -92,3 +92,21 @@
 
 
 2025-07-11 20:39:43,009 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:25:20,851 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 22:25:20,851 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 22:26:35,880 - __main__ - ERROR - Amadeus API error: [400]
+
+
+2025-07-11 22:28:20,800 - __main__ - ERROR - Amadeus API error: [400]
+
+
+2025-07-11 22:33:29,245 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 22:33:29,245 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 22:33:44,072 - __main__ - ERROR - Amadeus API error: [400]
+
+
+2025-07-11 22:34:19,659 - __main__ - ERROR - Amadeus API error: [400]
+
+
+2025-07-11 22:38:20,720 - main - INFO - Supabase client initialized successfully
+2025-07-11 22:38:20,720 - main - INFO - Amadeus client initialized successfully

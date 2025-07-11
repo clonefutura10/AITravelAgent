@@ -7,7 +7,7 @@ class APIService {
       : `https://${window.location.hostname.replace('frontend', 'backend')}`;
     
     // For Render deployment, you can also set this explicitly
-    // this.baseURL = "https://your-backend-app-name.onrender.com";
+    // this.baseURL = "https://ai-travel-agent-backend.onrender.com";
     this.endpoints = {
       upload: "/api/upload-photo",
       destinations: "/api/destinations",
