@@ -598,7 +598,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let origin = originInput.toUpperCase();
     let destination = destinationInput.toUpperCase();
     
-    // Extract 3-letter airport codes
+    // Extract 3-letter airport codes from the beginning of the string
+    // Handle formats like: "JFK - New York", "BOM - MUMBAI (CHHATRAPATI SHIVAJI MAHARAJ INTERNATIONAL AIRPORT)"
     if (origin.includes(" - ")) {
       origin = origin.split(" - ")[0].trim();
     }
@@ -606,10 +607,16 @@ document.addEventListener("DOMContentLoaded", function () {
       destination = destination.split(" - ")[0].trim();
     }
     
+    // Additional cleanup - remove any extra text after the 3-letter code
+    origin = origin.substring(0, 3);
+    destination = destination.substring(0, 3);
+    
     // Validate airport codes (must be 3 letters)
     if (origin.length !== 3 || destination.length !== 3) {
       console.warn(`Invalid airport codes: ${origin} -> ${destination}`);
     }
+    
+    console.log(`Extracted airport codes: ${origin} -> ${destination}`);
     
     const data = {
       origin: origin,

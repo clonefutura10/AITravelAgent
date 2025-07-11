@@ -110,3 +110,243 @@
 
 2025-07-11 22:38:20,720 - main - INFO - Supabase client initialized successfully
 2025-07-11 22:38:20,720 - main - INFO - Amadeus client initialized successfully
+2025-07-11 22:38:30,626 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:38:30,645 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 22:38:30,645 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 22:38:35,622 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 22:38:49,420 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 22:38:49,420 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 22:39:24,984 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 22:39:24,984 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 22:39:48,317 - __main__ - INFO - Flight search request: origin='BOM - MUMBAI (CHHATRAPATI SHIVAJI MAHARAJ INTERNATIONAL AIRPORT)' destination='BLR - BANGALORE (KEMPEGOWDA INTERNATIONAL AIRPORT)' departure_date='2025-07-24' return_date='2025-07-26' adults=2 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 22:39:48,318 - __main__ - WARNING - Invalid airport codes: BOM - MUMBAI (CHHATRAPATI SHIVAJI MAHARAJ INTERNATIONAL AIRPORT) -> BLR - BANGALORE (KEMPEGOWDA INTERNATIONAL AIRPORT)
+2025-07-11 22:46:09,293 - __main__ - INFO - Flight search request: origin='CDG - PARIS (CHARLES DE GAULLE AIRPORT)' destination='JFK - NEW YORK (JOHN F. KENNEDY INTERNATIONAL AIRPORT)' departure_date='2025-07-19' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 22:46:09,293 - __main__ - WARNING - Invalid airport codes: CDG - PARIS (CHARLES DE GAULLE AIRPORT) -> JFK - NEW YORK (JOHN F. KENNEDY INTERNATIONAL AIRPORT)
+2025-07-11 22:46:38,026 - __main__ - INFO - Hotel search request received: city_code='BLR' check_in_date='2025-07-12' check_out_date='2025-07-13' adults=1 children=0 room_quantity=1 currency_code='USD' price_range=None ratings=None
+2025-07-11 22:46:42,846 - __main__ - WARNING - Error getting offers for hotel GINGER: 'id'
+2025-07-11 22:46:44,282 - __main__ - WARNING - Error getting offers for hotel TEST HOTEL FOR HNS CERTIFICATION: [400]
+[hotelIds=VPBLR3RR] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:46:45,502 - __main__ - WARNING - Error getting offers for hotel GINGER BANGALORE WHITEFIELD: [400]
+[hotelIds=YHBLR01E] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:46:46,836 - __main__ - WARNING - Error getting offers for hotel TEST PROPERTY FOR DXM: [400]
+[hotelIds=HSBLR904] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:46:48,363 - __main__ - WARNING - Error getting offers for hotel MGM MARK WHITEFIELD: [400]
+[hotelIds=YXBLRMBB] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:46:49,704 - __main__ - WARNING - Error getting offers for hotel TEST HOTEL FROM HOC LITE UI: [400]
+[hotelIds=HNBLR985] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:46:51,038 - __main__ - WARNING - Error getting offers for hotel ENCORE: 'id'
+2025-07-11 22:46:52,298 - __main__ - WARNING - Error getting offers for hotel HOTEL SWAGATH: [400]
+[hotelIds=OIBLRWOG] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:46:53,800 - __main__ - WARNING - Error getting offers for hotel THE OBEROI, BANGALORE: [400]
+[hotelIds=OBBLROBE] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:46:55,030 - __main__ - WARNING - Error getting offers for hotel JAYA MAHAL PALACE: [400]
+[hotelIds=HSBLRABL] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:47:04,882 - __main__ - INFO - Hotel search request received: city_code='BLR' check_in_date='2025-07-12' check_out_date='2025-07-13' adults=1 children=0 room_quantity=1 currency_code='USD' price_range=None ratings=None
+2025-07-11 22:47:07,829 - __main__ - WARNING - Error getting offers for hotel RAMANASHREE CALIFORNIA RESORT: [400]
+[hotelIds=ILBLR020] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:47:09,376 - __main__ - WARNING - Error getting offers for hotel SWA TEST UAT PROPE: [400]
+[hotelIds=WVBLRIOQ] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:47:11,209 - __main__ - WARNING - Error getting offers for hotel MANIPAL COUNTY: [400]
+[hotelIds=ONBLRMAN] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:47:12,539 - __main__ - WARNING - Error getting offers for hotel TEST PROPERTY FOR HOS CLOUD DRY RUN 2: [400]
+[hotelIds=HNBLRCLL] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:47:13,871 - __main__ - WARNING - Error getting offers for hotel LK PENTEST PROPERTY: [400]
+[hotelIds=OIBLRWRM] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:47:15,306 - __main__ - WARNING - Error getting offers for hotel SUNRAY HOTEL - BANGALORE: [400]
+[hotelIds=YXBLRSHB] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:47:16,739 - __main__ - WARNING - Error getting offers for hotel BANGALORE GATE: [400]
+[hotelIds=HSBLRABU] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:47:17,913 - __main__ - WARNING - Error getting offers for hotel TEST PROPERTY FOR HN FEB: [400]
+[hotelIds=HNBLR212] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:47:19,265 - __main__ - WARNING - Error getting offers for hotel TEST PROP VEERA: [400]
+[hotelIds=RTBLR110] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:47:20,927 - __main__ - WARNING - Error getting offers for hotel GOLDEN TULIP BANGALORE ELECTRONIC CITY: [400]
+[hotelIds=GTBLRGTE] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:48:14,461 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:49:02,637 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/config "HTTP/1.1 200 OK"
+2025-07-11 22:49:04,038 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/info?serialize=False "HTTP/1.1 200 OK"
+2025-07-11 22:49:05,285 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/heartbeat/a398db24-3900-49e2-8265-692b8d520b6e "HTTP/1.1 200 OK"
+2025-07-11 22:49:06,205 - httpx - INFO - HTTP Request: POST https://multimodalart-ip-adapter-faceid.hf.space/upload "HTTP/1.1 200 OK"
+2025-07-11 22:49:07,379 - httpx - INFO - HTTP Request: POST https://multimodalart-ip-adapter-faceid.hf.space/queue/join "HTTP/1.1 200 OK"
+2025-07-11 22:49:08,608 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/queue/data?session_hash=a398db24-3900-49e2-8265-692b8d520b6e "HTTP/1.1 200 OK"
+2025-07-11 22:49:14,681 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/file=/tmp/gradio/6591b56578fecab62e5b078c256eea0a42db659e/image.webp "HTTP/1.1 200 OK"
+2025-07-11 22:49:16,555 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/file=/tmp/gradio/1d476cee929026cbbc4c1228a555a69e75d69821/image.webp "HTTP/1.1 200 OK"
+2025-07-11 22:49:17,798 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/file=/tmp/gradio/199ae80a8fabffec8920af417d9336205718ee22/image.webp "HTTP/1.1 200 OK"
+2025-07-11 22:49:19,517 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/file=/tmp/gradio/eff351531bb47569fcab1981b5f3d0f1453f94fb/image.webp "HTTP/1.1 200 OK"
+2025-07-11 22:49:43,481 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:49:43,815 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:49:44,115 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:49:44,265 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=continent "HTTP/1.1 200 OK"
+2025-07-11 22:49:44,531 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Europe "HTTP/1.1 200 OK"
+2025-07-11 22:49:44,670 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.South%20America "HTTP/1.1 200 OK"
+2025-07-11 22:49:44,929 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Asia "HTTP/1.1 200 OK"
+2025-07-11 22:49:44,930 - __main__ - INFO - Retrieved 3 continents from database
+2025-07-11 22:50:06,215 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-11 22:50:06,229 - __main__ - INFO - OpenAI generated destinations: ```json
+[
+  {
+    "id": "ffbb4c2a-8c38-4a4d-bd1c-9db5d8e4343b",
+    "name": "Tokyo Lights",
+    "country": "Japan",
+    "city": "Tokyo",
+    "continent": "Asia",
+    "description": "Experience the vib...
+2025-07-11 22:50:06,230 - __main__ - WARNING - Could not parse JSON from OpenAI response: Expecting ',' delimiter: line 117 column 86 (char 5338)
+2025-07-11 22:50:06,231 - __main__ - INFO - Extracted 9 destinations from malformed JSON
+2025-07-11 22:50:06,231 - __main__ - INFO - Generated 9 destinations with OpenAI
+2025-07-11 22:51:27,723 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:51:27,993 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:51:28,263 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=continent "HTTP/1.1 200 OK"
+2025-07-11 22:51:28,407 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Europe "HTTP/1.1 200 OK"
+2025-07-11 22:51:28,551 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.South%20America "HTTP/1.1 200 OK"
+2025-07-11 22:51:28,813 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Asia "HTTP/1.1 200 OK"
+2025-07-11 22:51:28,815 - __main__ - INFO - Retrieved 3 continents from database
+2025-07-11 22:51:28,965 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 22:51:58,921 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-11 22:51:58,941 - __main__ - INFO - OpenAI generated destinations: ```json
+[
+  {
+    "id": "1",
+    "name": "Kyoto Cherry Blossom Festival",
+    "country": "Japan",
+    "city": "Kyoto",
+    "continent": "Asia",
+    "description": "Experience the beauty of cherry blos...
+2025-07-11 22:51:58,941 - __main__ - WARNING - Could not parse JSON from OpenAI response: Expecting ',' delimiter: line 143 column 116 (char 6180)
+2025-07-11 22:51:58,942 - __main__ - INFO - Extracted 11 destinations from malformed JSON
+2025-07-11 22:51:58,942 - __main__ - INFO - Generated 11 destinations with OpenAI
+2025-07-11 22:52:22,312 - __main__ - INFO - Hotel search request received: city_code='BLR' check_in_date='2025-07-12' check_out_date='2025-07-16' adults=1 children=0 room_quantity=1 currency_code='USD' price_range=None ratings=None
+2025-07-11 22:52:25,685 - __main__ - WARNING - Error getting offers for hotel TEST PROPERTY IN UAT AZURE: [400]
+[hotelIds=HNBLRAZE] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:52:27,181 - __main__ - WARNING - Error getting offers for hotel RAMADA BANGALORE: [400]
+[hotelIds=RABLRHHC] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:52:28,657 - __main__ - WARNING - Error getting offers for hotel TEST HOTEL 4 FOR SYNXIS: 'id'
+2025-07-11 22:52:31,624 - __main__ - WARNING - Error getting offers for hotel JW MARRIOTT HOTEL BENGALURU: [400]
+[hotelIds=MCBLRJWM] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:52:33,059 - __main__ - WARNING - Error getting offers for hotel JW MARRIOTT HOTEL BENGALURU: [400]
+[hotelIds=DHBLRALL] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:52:34,594 - __main__ - WARNING - Error getting offers for hotel CRETAN TEST PROPERTY: [400]
+[hotelIds=VPBLR47S] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:52:35,922 - __main__ - WARNING - Error getting offers for hotel THE CHANCERY PAVILION: [400]
+[hotelIds=WVBLR907] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:52:37,437 - __main__ - WARNING - Error getting offers for hotel BW PREMIER LA MARVELLA: [400]
+[hotelIds=BWBLR552] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:52:39,203 - __main__ - WARNING - Error getting offers for hotel SWA TEST UAT PROPE: [400]
+[hotelIds=WVBLRIOQ] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:52:41,046 - __main__ - WARNING - Error getting offers for hotel TEST PROPERTY: [400]
+[hotelIds=HNBLR569] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:53:07,124 - __main__ - INFO - Hotel search request received: city_code='BOM' check_in_date='2025-07-12' check_out_date='2025-07-16' adults=1 children=0 room_quantity=1 currency_code='USD' price_range=None ratings=None
+2025-07-11 22:53:10,127 - __main__ - WARNING - Error getting offers for hotel VIVANTA BY TAJ PRESIDENT: [400]
+[hotelIds=TJBOMPRE] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:53:13,097 - __main__ - WARNING - Error getting offers for hotel INTERCONTINENTAL MARINE DRIVE: 'id'
+2025-07-11 22:53:15,350 - __main__ - WARNING - Error getting offers for hotel COMFORT INN HERITAGE: [400]
+[hotelIds=CIBOM062] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:53:16,682 - __main__ - WARNING - Error getting offers for hotel REGENCY INN: [400]
+[hotelIds=ILBOM137] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:53:18,936 - __main__ - WARNING - Error getting offers for hotel COUNTRY INN SUITES NAVI MUMBAI: [400]
+[hotelIds=CXBOM561] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:53:20,881 - __main__ - WARNING - Error getting offers for hotel THE ORIENTAL RESIDENCY HOTEL: [400]
+[hotelIds=FGBOMORM] Provider Error - VERIFY CHAIN/REP CODE
+2025-07-11 22:53:22,334 - __main__ - WARNING - Error getting offers for hotel LE SUTRA: [400]
+[hotelIds=YXBOM615] Provider Error - INVALID PROPERTY CODE
+2025-07-11 22:53:23,749 - __main__ - WARNING - Error getting offers for hotel HOTEL REGAL ENCLAVE: [400]
+[hotelIds=OIBOMREN] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:53:24,977 - __main__ - WARNING - Error getting offers for hotel KEYS HOTELS - NESTOR MUMBAI: [400]
+[hotelIds=IMBOMKHN] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 22:53:26,579 - __main__ - WARNING - Error getting offers for hotel U TROPICANA ALIBAUG: [400]
+[hotelIds=WVBOM426] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:00:19,899 - __main__ - INFO - Flight search request: origin='BOM - MUMBAI (CHHATRAPATI SHIVAJI MAHARAJ INTERNATIONAL AIRPORT)' destination='BLR - BANGALORE (KEMPEGOWDA INTERNATIONAL AIRPORT)' departure_date='2025-07-24' return_date='2025-07-26' adults=2 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:00:19,899 - __main__ - WARNING - Invalid airport codes: BOM - MUMBAI (CHHATRAPATI SHIVAJI MAHARAJ INTERNATIONAL AIRPORT) -> BLR - BANGALORE (KEMPEGOWDA INTERNATIONAL AIRPORT)
+2025-07-11 23:00:36,524 - __main__ - INFO - Hotel search request received: city_code='BOS' check_in_date='2025-07-31' check_out_date='2025-08-01' adults=1 children=0 room_quantity=1 currency_code='USD' price_range=None ratings=None
+2025-07-11 23:00:39,470 - __main__ - WARNING - Error getting offers for hotel MOTEL 6 BOSTON NORTH - DANVERS: [400]
+[hotelIds=MXBOSA62] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:00:40,922 - __main__ - WARNING - Error getting offers for hotel EXTENDED STAY AMERICA WESTBORO: [400]
+[hotelIds=EABOS244] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:00:42,604 - __main__ - WARNING - Error getting offers for hotel BEST WESTERN ROCKLAND: [400]
+[hotelIds=BWBOS056] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:00:44,831 - __main__ - WARNING - Error getting offers for hotel COUNTRY INN SUITES BROCKTON: [400]
+[hotelIds=CXBOS364] Provider Error - PROPERTY CODE NOT FOUND IN SYSTEM
+2025-07-11 23:00:46,571 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 23:00:46,571 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 23:00:47,192 - __main__ - WARNING - Error getting offers for hotel COURTYARD NATICK MARRIOTT: [400]
+[hotelIds=CYBOSNFC] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:00:49,197 - __main__ - WARNING - Error getting offers for hotel HOLIDAY INN ROCKLAND SOUTH: [400]
+[hotelIds=HIBOSD1A] Provider Error - PROPERTY CODE NOT FOUND IN SYSTEM
+2025-07-11 23:00:50,836 - __main__ - WARNING - Error getting offers for hotel HARVARD SQUARE: [400]
+[hotelIds=YXBOSAHS] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:00:53,156 - __main__ - WARNING - Error getting offers for hotel MILLENNIUM BOSTONIAN HOTEL: [400]
+[hotelIds=MUBOSSBH] Provider Error - ROOM OR RATE NOT FOUND
+2025-07-11 23:00:55,030 - __main__ - WARNING - Error getting offers for hotel HAMPTON INN AND SUITES EXETER: 'id'
+2025-07-11 23:00:56,482 - __main__ - WARNING - Error getting offers for hotel COURTYARD FOXBOROUGH MARRIOTT: [400]
+[hotelIds=CYBOSFBC] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:00:57,309 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 23:01:01,034 - __main__ - INFO - Flight search request: origin='JFK' destination='LAX' departure_date='2024-12-25' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:01:02,089 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 23:01:06,267 - __main__ - INFO - Flight search request: origin='JFK' destination='LAX' departure_date='2024-12-25' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:01:07,281 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 23:01:11,688 - __main__ - INFO - Flight search request: origin='JFK' destination='LAX' departure_date='2025-01-15' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:01:12,769 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 23:01:39,840 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 23:01:39,840 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 23:01:41,766 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 23:01:48,074 - __main__ - INFO - Flight search request: origin='JFK' destination='LAX' departure_date='2025-01-15' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:01:48,074 - __main__ - INFO - Using airport codes: JFK -> LAX
+2025-07-11 23:01:50,124 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 23:01:50,125 - __main__ - ERROR - Amadeus error details: <bound method ResponseError.description of ClientError('[400]\n')>
+2025-07-11 23:01:50,125 - __main__ - ERROR - Amadeus error code: ClientError
+2025-07-11 23:03:47,343 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 23:03:51,929 - __main__ - INFO - Flight search request: origin='JFK' destination='LAX' departure_date='2025-01-15' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:03:51,929 - __main__ - INFO - Using airport codes: JFK -> LAX
+2025-07-11 23:03:53,088 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 23:03:53,088 - __main__ - ERROR - Amadeus error details: <bound method ResponseError.description of ClientError('[400]\n')>
+2025-07-11 23:03:53,088 - __main__ - ERROR - Amadeus error code: ClientError
+2025-07-11 23:04:39,905 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 23:04:44,790 - __main__ - INFO - Flight search request: origin='JFK' destination='LAX' departure_date='2025-01-15' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:04:44,790 - __main__ - INFO - Using airport codes: JFK -> LAX
+2025-07-11 23:04:45,911 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 23:04:45,911 - __main__ - ERROR - Amadeus error details: <bound method ResponseError.description of ClientError('[400]\n')>
+2025-07-11 23:04:45,911 - __main__ - ERROR - Amadeus error code: ClientError
+2025-07-11 23:04:52,908 - __main__ - ERROR - Failed to initialize Supabase client: Invalid URL
+2025-07-11 23:04:52,909 - __main__ - WARNING - Amadeus credentials not found or not properly configured
+2025-07-11 23:05:04,471 - __main__ - INFO - Flight search request: origin='JFK' destination='LAX' departure_date='2025-01-15' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:05:04,472 - __main__ - INFO - Using airport codes: JFK -> LAX
+2025-07-11 23:05:05,596 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 23:05:05,596 - __main__ - ERROR - Amadeus error details: <bound method ResponseError.description of ClientError('[400]\n')>
+2025-07-11 23:05:05,596 - __main__ - ERROR - Amadeus error code: ClientError
+2025-07-11 23:05:20,169 - __main__ - INFO - Flight search request: origin='JFK' destination='LAX' departure_date='2025-01-15' return_date=None adults=1 children=0 infants=0 travel_class='ECONOMY' currency_code='USD'
+2025-07-11 23:05:20,169 - __main__ - INFO - Using airport codes: JFK -> LAX
+2025-07-11 23:05:21,292 - __main__ - ERROR - Amadeus API error: [400]
+
+2025-07-11 23:05:21,293 - __main__ - ERROR - Amadeus error details: <bound method ResponseError.description of ClientError('[400]\n')>
+2025-07-11 23:05:21,293 - __main__ - ERROR - Amadeus error code: ClientError
+2025-07-11 23:06:48,929 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 23:06:48,930 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 23:07:30,993 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 23:07:30,993 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 23:07:51,439 - __main__ - INFO - Hotel search request received: city_code='BLR' check_in_date='2025-07-18' check_out_date='2025-07-19' adults=1 children=0 room_quantity=1 currency_code='USD' price_range=None ratings=None
+2025-07-11 23:07:55,598 - __main__ - WARNING - Error getting offers for hotel THE OBEROI, BANGALORE: [400]
+[hotelIds=OBBLROBE] Provider Error - INVALID PROPERTY CODE
+2025-07-11 23:07:56,828 - __main__ - WARNING - Error getting offers for hotel GINGER BANGALORE  IRR: [400]
+[hotelIds=YHBLRGBI] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:07:58,157 - __main__ - WARNING - Error getting offers for hotel TEST PROPERTY FOR CONTENT API: [400]
+[hotelIds=HNBLRRRE] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:07:59,797 - __main__ - WARNING - Error getting offers for hotel THE BELL HOTEL: [400]
+[hotelIds=ONBLRBEL] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:08:01,050 - __main__ - WARNING - Error getting offers for hotel TEST PROPETY 2828: [400]
+[hotelIds=HNBLR698] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:08:02,383 - __main__ - WARNING - Error getting offers for hotel HOTEL MSD: 'id'
+2025-07-11 23:08:03,894 - __main__ - WARNING - Error getting offers for hotel THE RITZ CARLTON, BANGALORE: [400]
+[hotelIds=DHBLRAHU] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:08:06,026 - __main__ - WARNING - Error getting offers for hotel THE RITZ-CARLTON BANGALORE: 'id'
+2025-07-11 23:08:07,270 - __main__ - WARNING - Error getting offers for hotel STERLING SUITES RESIDENCY ROAD: [400]
+[hotelIds=UZBLR522] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+2025-07-11 23:08:08,603 - __main__ - WARNING - Error getting offers for hotel TEST PROP FOR DOCS: [400]
+[hotelIds=VPBLR0RB] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY

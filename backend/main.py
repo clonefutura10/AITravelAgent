@@ -125,14 +125,17 @@ amadeus_client = None
 try:
     amadeus_client_id = os.getenv("AMADEUS_CLIENT_ID")
     amadeus_client_secret = os.getenv("AMADEUS_CLIENT_SECRET")
-    if amadeus_client_id and amadeus_client_secret:
+    
+    # Check if credentials are actually set (not just empty strings)
+    if amadeus_client_id and amadeus_client_secret and amadeus_client_id != "your_amadeus_client_id_here" and amadeus_client_secret != "your_amadeus_client_secret_here":
         amadeus_client = AmadeusClient(
             client_id=amadeus_client_id,
             client_secret=amadeus_client_secret
         )
         logger.info("Amadeus client initialized successfully")
     else:
-        logger.warning("Amadeus credentials not found")
+        logger.warning("Amadeus credentials not found or not properly configured")
+        amadeus_client = None
 except Exception as e:
     logger.error(f"Failed to initialize Amadeus client: {e}")
     amadeus_client = None
@@ -2396,6 +2399,9 @@ async def search_flights(
                 "provider": "Mock Data (Invalid airport codes)"
             }
         
+        # Log the cleaned airport codes
+        logger.info(f"Using airport codes: {data.origin} -> {data.destination}")
+        
         # Validate dates
         try:
             from datetime import datetime
@@ -2474,6 +2480,8 @@ async def search_flights(
             
         except ResponseError as e:
             logger.error(f"Amadeus API error: {e}")
+            logger.error(f"Amadeus error details: {e.description if hasattr(e, 'description') else 'No description'}")
+            logger.error(f"Amadeus error code: {e.code if hasattr(e, 'code') else 'No code'}")
             # Return mock data instead of throwing an error
             return {
                 "success": True,

@@ -8,6 +8,8 @@ services:
     envVars:
       - key: PYTHON_VERSION
         value: 3.11.0
+      - key: PIP_VERSION
+        value: 23.3.1
       - key: RENDER
         value: true
       - key: SUPABASE_URL
