@@ -1,0 +1,94 @@
+2025-07-11 20:16:03,229 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 20:16:03,229 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 20:16:27,737 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:16:43,138 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/config "HTTP/1.1 200 OK"
+2025-07-11 20:16:44,674 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/info?serialize=False "HTTP/1.1 200 OK"
+2025-07-11 20:16:45,694 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/heartbeat/9b2bd258-2ea4-45c4-973e-f5c399e63bfb "HTTP/1.1 200 OK"
+2025-07-11 20:16:47,335 - httpx - INFO - HTTP Request: POST https://multimodalart-ip-adapter-faceid.hf.space/upload "HTTP/1.1 200 OK"
+2025-07-11 20:16:48,374 - httpx - INFO - HTTP Request: POST https://multimodalart-ip-adapter-faceid.hf.space/queue/join "HTTP/1.1 200 OK"
+2025-07-11 20:16:49,792 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/queue/data?session_hash=9b2bd258-2ea4-45c4-973e-f5c399e63bfb "HTTP/1.1 200 OK"
+2025-07-11 20:16:55,823 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/file=/tmp/gradio/8b4fc50f75edbc854fbd9326ea6dadc98cb16ee0/image.webp "HTTP/1.1 200 OK"
+2025-07-11 20:16:57,064 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/file=/tmp/gradio/f21792dede59ab7047fb909057c15c3099ecd313/image.webp "HTTP/1.1 200 OK"
+2025-07-11 20:16:58,600 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/file=/tmp/gradio/e6e2bb307371a67ca647f897bbea9182f6f560a4/image.webp "HTTP/1.1 200 OK"
+2025-07-11 20:17:00,443 - httpx - INFO - HTTP Request: GET https://multimodalart-ip-adapter-faceid.hf.space/file=/tmp/gradio/c7cd6b248185bea8a4736c0dabb04ff311cc8bd9/image.webp "HTTP/1.1 200 OK"
+2025-07-11 20:17:05,255 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:17:05,563 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:17:05,731 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:17:06,076 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=continent "HTTP/1.1 200 OK"
+2025-07-11 20:17:06,445 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Europe "HTTP/1.1 200 OK"
+2025-07-11 20:17:06,792 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.South%20America "HTTP/1.1 200 OK"
+2025-07-11 20:17:07,100 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Asia "HTTP/1.1 200 OK"
+2025-07-11 20:17:07,101 - __main__ - INFO - Retrieved 3 continents from database
+2025-07-11 20:17:07,265 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=%2A&limit=50&order=name "HTTP/1.1 200 OK"
+2025-07-11 20:17:07,267 - __main__ - INFO - Retrieved 5 destinations from database
+2025-07-11 20:21:05,175 - __main__ - INFO - Generating personalized recommendations for 26-35 friends group with $3000 budget
+2025-07-11 20:21:10,106 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-11 20:21:10,123 - __main__ - INFO - Successfully generated recommendations with 3 destinations
+2025-07-11 20:28:05,856 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 20:28:05,857 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 20:28:24,087 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:28:24,492 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:28:24,901 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:28:25,309 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=continent "HTTP/1.1 200 OK"
+2025-07-11 20:28:25,720 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Asia "HTTP/1.1 200 OK"
+2025-07-11 20:28:25,894 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.South%20America "HTTP/1.1 200 OK"
+2025-07-11 20:28:26,046 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Europe "HTTP/1.1 200 OK"
+2025-07-11 20:28:26,048 - __main__ - INFO - Retrieved 3 continents from database
+2025-07-11 20:28:26,694 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=%2A&limit=50&order=name "HTTP/1.1 200 OK"
+2025-07-11 20:28:26,696 - __main__ - INFO - Retrieved 5 destinations from database
+2025-07-11 20:31:30,295 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 20:31:30,295 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 20:32:15,407 - __main__ - ERROR - Amadeus API error: [400]
+
+
+2025-07-11 20:34:27,277 - main - INFO - Supabase client initialized successfully
+2025-07-11 20:34:27,277 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 20:34:27,277 - main - INFO - Amadeus client initialized successfully
+2025-07-11 20:34:27,278 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 20:34:34,470 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:34:47,178 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-11 20:34:47,183 - __main__ - INFO - OpenAI generated destinations: ```json
+[
+  {
+    "id": "a1b2c3d4",
+    "name": "Cape Town Bliss",
+    "country": "South Africa",
+    "city": "Cape Town",
+    "continent": "Africa",
+    "description": "Experience the vibrant culture...
+2025-07-11 20:34:47,183 - __main__ - INFO - Generated 5 destinations with OpenAI
+2025-07-11 20:34:50,236 - __main__ - INFO - Getting destination suggestions for: par
+2025-07-11 20:34:52,696 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-11 20:34:52,699 - __main__ - INFO - OpenAI suggestions: ['Paris, France', 'Barcelona, Spain', 'Milan, Italy', 'Bangkok, Thailand', 'Mumbai, India', 'Buenos Aires, Argentina', 'Cairo, Egypt', 'Osaka, Japan', 'Park City, USA', 'Paros, Greece', 'Paraguay', 'Patagonia']
+2025-07-11 20:36:00,909 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 20:36:00,909 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 20:36:32,681 - __main__ - INFO - Supabase client initialized successfully
+2025-07-11 20:36:32,681 - __main__ - INFO - Amadeus client initialized successfully
+2025-07-11 20:36:48,088 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:36:48,411 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:36:48,720 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=continent "HTTP/1.1 200 OK"
+2025-07-11 20:36:49,027 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Asia "HTTP/1.1 200 OK"
+2025-07-11 20:36:49,288 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.Europe "HTTP/1.1 200 OK"
+2025-07-11 20:36:49,640 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&continent=eq.South%20America "HTTP/1.1 200 OK"
+2025-07-11 20:36:49,642 - __main__ - INFO - Retrieved 3 continents from database
+2025-07-11 20:36:49,787 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+2025-07-11 20:37:22,200 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-11 20:37:22,209 - __main__ - INFO - OpenAI generated destinations: ```json
+[
+  {
+    "id": "1f7c8f4c-1d1b-4b2b-b5db-450c8c8d6c91",
+    "name": "Santorini Sunset",
+    "country": "Greece",
+    "city": "Santorini",
+    "continent": "Europe",
+    "description": "Experie...
+2025-07-11 20:37:22,209 - __main__ - WARNING - Could not parse JSON from OpenAI response: Expecting ',' delimiter: line 117 column 160 (char 5825)
+2025-07-11 20:37:22,210 - __main__ - INFO - Extracted 9 destinations from malformed JSON
+2025-07-11 20:37:22,210 - __main__ - INFO - Generated 9 destinations with OpenAI
+2025-07-11 20:38:40,540 - __main__ - INFO - Generating personalized recommendations for 26-35 family group with $3000 budget
+2025-07-11 20:38:46,230 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-07-11 20:38:46,237 - __main__ - INFO - Successfully generated recommendations with 3 destinations
+2025-07-11 20:39:09,507 - __main__ - ERROR - Amadeus API error: [400]
+
+
+2025-07-11 20:39:43,009 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
