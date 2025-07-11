@@ -92,6 +92,7 @@
 
 
 2025-07-11 20:39:43,009 - httpx - INFO - HTTP Request: GET https://yigciabzkcpolbmisyis.supabase.co/rest/v1/destinations?select=id&limit=1 "HTTP/1.1 200 OK"
+<<<<<<< HEAD
 2025-07-11 22:25:20,851 - __main__ - INFO - Supabase client initialized successfully
 2025-07-11 22:25:20,851 - __main__ - INFO - Amadeus client initialized successfully
 2025-07-11 22:26:35,880 - __main__ - ERROR - Amadeus API error: [400]
@@ -350,3 +351,5 @@
 [hotelIds=UZBLR522] NO ROOMS AVAILABLE AT REQUESTED PROPERTY
 2025-07-11 23:08:08,603 - __main__ - WARNING - Error getting offers for hotel TEST PROP FOR DOCS: [400]
 [hotelIds=VPBLR0RB] Provider Error - NO ROOMS AVAILABLE AT REQUESTED PROPERTY
+=======
+>>>>>>> 5835970ba43d3cc4d5bad1ad9a298bcba9f6abff
