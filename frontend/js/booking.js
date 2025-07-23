@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
               } else {
                 // For other fields, use the API
                 const response = await fetch(
-                  `http://localhost:8000/api/destination-suggestions?query=${encodeURIComponent(
+                  `${window.API_BASE_URL || 'http://localhost:8000'}/api/destination-suggestions?query=${encodeURIComponent(
                     query
                   )}`
                 );
@@ -449,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Flight search data:", searchData);
 
         const response = await fetch(
-          "http://localhost:8000/api/search-flights",
+          `${window.API_BASE_URL || 'http://localhost:8000'}/api/search-flights`,
           {
             method: "POST",
             headers: {
@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const response = await fetch(
-          "http://localhost:8000/api/search-hotels",
+          `${window.API_BASE_URL || 'http://localhost:8000'}/api/search-hotels`,
           {
             method: "POST",
             headers: {
@@ -539,7 +539,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Use the existing endpoint for other types
         const searchData = getSearchData(type);
         const response = await fetch(
-          "http://localhost:8000/api/search-bookings",
+          `${window.API_BASE_URL || 'http://localhost:8000'}/api/search-bookings`,
           {
             method: "POST",
             headers: {
@@ -888,50 +888,70 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     return `
-            <div class="flight-card">
-                <div class="flight-route">
-                    <div class="flight-route-info">
-                        <div class="flight-cities">${from} → ${to}</div>
-                        <div class="flight-airlines">${airline}</div>
-                        <div class="flight-details">Flight ${flightNumber} • ${aircraft} • ${stops} stop${stops !== 1 ? "s" : ""}</div>
-                    </div>
-                </div>
-                <div class="flight-times">
-                    <div class="flight-time">${departureTime}</div>
-                    <div class="flight-date">${departureDate}</div>
-                </div>
-                <div class="flight-duration">${duration}</div>
-                <div class="flight-price">
-                    <div class="price-amount">
-                        <div class="primary-price">${getCurrencySymbol(
-                          currency
-                        )}${price}</div>
-                        ${
-                          currency !== "USD"
-                            ? `<div class="secondary-price">$${(
-                                price * getExchangeRate(currency, "USD")
-                              ).toFixed(0)}</div>`
-                            : ""
-                        }
-                        ${
-                          currency !== "INR"
-                            ? `<div class="secondary-price">₹${(
-                                price * getExchangeRate(currency, "INR")
-                              ).toFixed(0)}</div>`
-                            : ""
-                        }
-                    </div>
-                    <div class="price-per">per person</div>
-                    <div class="price-class">${classType}</div>
-                </div>
-                <div class="flight-actions">
-                    <button class="btn btn-primary btn-small" onclick="handleBooking('flights', '${flightId}')">
-                        <i class="fas fa-plane"></i>
-                        Book Flight
-                    </button>
-                </div>
+      <div class="flight-card">
+        <div class="flight-route">
+          <div class="flight-route-info">
+            <div class="flight-cities">
+              <span class="city-code">${from}</span>
+              <i class="fas fa-plane flight-arrow"></i>
+              <span class="city-code">${to}</span>
             </div>
-        `;
+            <div class="flight-airline">
+              <span class="airline-code">${airline}</span>
+            </div>
+            <div class="flight-details">
+              <span class="flight-number">Flight ${flightNumber}</span>
+              <span class="flight-separator">•</span>
+              <span class="aircraft-type">${aircraft}</span>
+              <span class="flight-separator">•</span>
+              <span class="stops-info">${stops} stop${stops !== 1 ? "s" : ""}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="flight-schedule">
+          <div class="departure-info">
+            <div class="time">${departureTime}</div>
+            <div class="date">${departureDate}</div>
+          </div>
+          <div class="duration-info">
+            <i class="fas fa-clock"></i>
+            <span>${duration}</span>
+          </div>
+        </div>
+        
+        <div class="flight-pricing">
+          <div class="price-main">
+            <div class="primary-price">${getCurrencySymbol(currency)}${price.toFixed(2)}</div>
+            ${
+              currency !== "USD"
+                ? `<div class="secondary-price">$${(
+                    price * getExchangeRate(currency, "USD")
+                  ).toFixed(0)}</div>`
+                : ""
+            }
+            ${
+              currency !== "INR"
+                ? `<div class="secondary-price">₹${(
+                    price * getExchangeRate(currency, "INR")
+                  ).toFixed(0)}</div>`
+                : ""
+            }
+          </div>
+          <div class="price-details">
+            <span class="price-per">per person</span>
+            <span class="class-type">${classType.toUpperCase()}</span>
+          </div>
+        </div>
+        
+        <div class="flight-actions">
+          <button class="book-flight-btn" onclick="handleBooking('flights', '${flightId}')">
+            <i class="fas fa-plane"></i>
+            Book Flight
+          </button>
+        </div>
+      </div>
+    `;
   }
 
   function createHotelCard(hotel) {
@@ -1491,7 +1511,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Submit booking to API
-      const response = await fetch("http://localhost:8000/api/book", {
+      const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
