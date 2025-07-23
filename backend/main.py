@@ -102,6 +102,7 @@ app.add_middleware(
         "http://127.0.0.1:3000",
         "http://127.0.0.1:8000",
         "https://travel-agent-backend.onrender.com",  # Your specific backend domain
+        "https://travel-agent-backend-74fv.onrender.com",  # Your actual backend domain
         "https://travel-agent-frontend.onrender.com",  # Your specific frontend domain
         "https://travel-agent-frontend-coq0.onrender.com",  # Your actual frontend domain
         "https://ai-travel-agent-frontend.onrender.com",  # Alternative frontend domain
