@@ -101,10 +101,12 @@ app.add_middleware(
         "http://localhost:8000", 
         "http://127.0.0.1:3000",
         "http://127.0.0.1:8000",
-        "https://*.onrender.com",  # Allow all Render domains
         "https://travel-agent-backend.onrender.com",  # Your specific backend domain
-        "https://travel-agent-frontend.onrender.com"  # Your specific frontend domain
-    ] if os.getenv("RENDER", "false").lower() == "true" else ["*"],
+        "https://travel-agent-frontend.onrender.com",  # Your specific frontend domain
+        "https://travel-agent-frontend-coq0.onrender.com",  # Your actual frontend domain
+        "https://ai-travel-agent-frontend.onrender.com",  # Alternative frontend domain
+        "https://ai-travel-agent-backend.onrender.com"  # Your backend domain
+    ] + (["*"] if os.getenv("RENDER", "false").lower() != "true" else []),  # Allow all origins in development
     allow_credentials=False,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
