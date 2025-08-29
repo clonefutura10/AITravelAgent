@@ -1872,3 +1872,20 @@ gradio_client.exceptions.AppError: The upstream Gradio app has raised an excepti
 
 2025-07-21 22:51:16,318 - __main__ - ERROR - Amadeus error details: <bound method ResponseError.description of ServerError('[500]\n')>
 2025-07-21 22:51:16,318 - __main__ - ERROR - Amadeus error code: ServerError
+2025-08-29 17:16:47,236 - __main__ - INFO - Supabase client initialized successfully
+2025-08-29 17:16:47,236 - __main__ - INFO - Amadeus client initialized successfully
+2025-08-29 17:21:02,149 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-08-29 17:21:02,173 - __main__ - INFO - OpenAI generated destinations: ```json
+[
+  {
+    "id": "dbd3c1c2-6e77-4b2e-9e73-8d8f9b669b66",
+    "name": "Santorini",
+    "country": "Greece",
+    "city": "Santorini",
+    "continent": "Europe",
+    "description": "Santorini is f...
+2025-08-29 17:21:02,176 - __main__ - WARNING - Could not parse JSON from OpenAI response: Expecting ',' delimiter: line 117 column 84 (char 6072)
+2025-08-29 17:21:02,178 - __main__ - INFO - Extracted 9 destinations from malformed JSON
+2025-08-29 17:21:02,178 - __main__ - INFO - Generated 9 destinations with OpenAI
+2025-08-29 17:21:02,757 - __main__ - WARNING - Database query failed, using mock data: [Errno 8] nodename nor servname provided, or not known
+2025-08-29 17:21:02,757 - __main__ - INFO - Returning 6 mock continents

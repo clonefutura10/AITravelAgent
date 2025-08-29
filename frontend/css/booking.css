@@ -1,3 +1,496 @@
+/* Premium Booking & Trips Styles for WanderAI */
+
+/* Trips Page Styles */
+.trips-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-8);
+  gap: var(--spacing-8);
+}
+
+.header-content h1 {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.header-content p {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.header-actions {
+  flex-shrink: 0;
+}
+
+/* Profile Section */
+.profile-section {
+  margin-bottom: var(--spacing-12);
+}
+
+.profile-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-8);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.profile-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-primary);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-8);
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-3xl);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-name {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.profile-status {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+}
+
+.profile-details {
+  border-top: 1px solid var(--border-color);
+  padding-top: var(--spacing-6);
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-6);
+}
+
+.profile-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.profile-item i {
+  font-size: var(--font-size-xl);
+  color: var(--primary-color);
+}
+
+.profile-label {
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profile-value {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-6);
+  margin-bottom: var(--spacing-12);
+}
+
+.action-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-6);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+}
+
+.action-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-xl);
+}
+
+.action-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-xl);
+  background: var(--gradient-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-xl);
+  color: white;
+  flex-shrink: 0;
+}
+
+.action-content {
+  flex: 1;
+}
+
+.action-content h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.action-content p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-4);
+  line-height: 1.4;
+}
+
+/* Trip History */
+.trip-history-section,
+.saved-destinations-section,
+.recent-recommendations-section {
+  margin-bottom: var(--spacing-12);
+}
+
+.trip-history-grid,
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: var(--spacing-8);
+  margin-top: var(--spacing-8);
+}
+
+.trip-card,
+.destination-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.trip-card::before,
+.destination-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.trip-card:hover::before,
+.destination-card:hover::before {
+  opacity: 1;
+}
+
+.trip-card:hover,
+.destination-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-2xl);
+}
+
+.trip-image,
+.destination-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.trip-content,
+.destination-content {
+  padding: var(--spacing-6);
+}
+
+.trip-title,
+.destination-title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.trip-dates,
+.destination-location {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-4);
+}
+
+.trip-description,
+.destination-description {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  margin-bottom: var(--spacing-4);
+}
+
+.trip-meta,
+.destination-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-4);
+}
+
+.trip-status {
+  padding: var(--spacing-1) var(--spacing-3);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.trip-status.completed {
+  background: rgba(var(--success-rgb), 0.1);
+  color: var(--success-color);
+}
+
+.trip-status.upcoming {
+  background: rgba(var(--warning-rgb), 0.1);
+  color: var(--warning-color);
+}
+
+.trip-status.cancelled {
+  background: rgba(var(--error-rgb), 0.1);
+  color: var(--error-color);
+}
+
+.trip-price,
+.destination-price {
+  color: var(--success-color);
+  font-weight: 600;
+  font-size: var(--font-size-lg);
+}
+
+.trip-actions,
+.destination-actions {
+  display: flex;
+  gap: var(--spacing-3);
+}
+
+/* No Content Messages */
+.no-trips-message,
+.no-destinations-message,
+.no-recommendations-message {
+  text-align: center;
+  padding: var(--spacing-12) var(--spacing-8);
+  color: var(--text-secondary);
+}
+
+.no-trips-message i,
+.no-destinations-message i,
+.no-recommendations-message i {
+  font-size: var(--font-size-5xl);
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-4);
+}
+
+.no-trips-message h3,
+.no-destinations-message h3,
+.no-recommendations-message h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.no-trips-message p,
+.no-destinations-message p,
+.no-recommendations-message p {
+  margin-bottom: var(--spacing-6);
+  font-size: var(--font-size-base);
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--spacing-4);
+}
+
+.modal-content {
+  background: var(--card-bg);
+  border-radius: var(--radius-2xl);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-2xl);
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-6) var(--spacing-8);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: var(--font-size-xl);
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--spacing-2);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.modal-close:hover {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.profile-edit-form {
+  padding: var(--spacing-8);
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--spacing-4);
+  justify-content: flex-end;
+  margin-top: var(--spacing-8);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--border-color);
+}
+
+/* Responsive Design for Trips Page */
+@media (max-width: 768px) {
+  .trips-header {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+  
+  .header-content h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .profile-header {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-4);
+  }
+  
+  .profile-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+  
+  .quick-actions {
+    grid-template-columns: 1fr;
+  }
+  
+  .action-card {
+    flex-direction: column;
+    text-align: center;
+    gap: var(--spacing-4);
+  }
+  
+  .trip-history-grid,
+  .destinations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .trip-actions,
+  .destination-actions {
+    flex-direction: column;
+  }
+  
+  .modal-content {
+    margin: var(--spacing-4);
+    max-height: calc(100vh - 2rem);
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-card,
+  .action-card {
+    padding: var(--spacing-6);
+  }
+  
+  .trip-content,
+  .destination-content {
+    padding: var(--spacing-4);
+  }
+  
+  .modal-header,
+  .profile-edit-form {
+    padding: var(--spacing-6);
+  }
+  
+  .profile-avatar {
+    width: 60px;
+    height: 60px;
+    font-size: var(--font-size-2xl);
+  }
+  
+  .action-icon {
+    width: 50px;
+    height: 50px;
+    font-size: var(--font-size-lg);
+  }
+}
+
 /* Booking Page Specific Styles */
 
 /* Booking Header */

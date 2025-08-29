@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Visualizations - AI Travel</title>
+    <title>My Trips - WanderAI</title>
     <meta
       name="description"
-      content="Your AI-generated travel photos. Relive your virtual adventures and share them with the world."
+      content="View your travel profile, saved preferences, and trip history with WanderAI."
     />
 
     <!-- Fonts -->
@@ -25,6 +25,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/booking.css" />
   </head>
   <body>
     <!-- Navigation -->
@@ -33,12 +34,12 @@
         <div class="nav-logo">
           <a href="index.html" class="logo-link">
             <div class="logo-icon">
-              <i class="fas fa-magic"></i>
+              <i class="fas fa-compass"></i>
               <div class="logo-dot"></div>
             </div>
             <div class="logo-text">
-              <span class="logo-title">AI Travel</span>
-              <div class="logo-subtitle">Visualize Your Dreams</div>
+              <span class="logo-title">WanderAI</span>
+              <div class="logo-subtitle">Your Travel Companion</div>
             </div>
           </a>
         </div>
@@ -46,11 +47,11 @@
         <div class="nav-menu" id="nav-menu">
           <a href="upload.html" class="nav-link">
             <i class="fas fa-camera"></i>
-            <span>Upload Photo</span>
+            <span>Start Planning</span>
           </a>
           <a href="recommendations.html" class="nav-link">
             <i class="fas fa-magic"></i>
-            <span>Recommendations</span>
+            <span>Get Recommendations</span>
           </a>
           <a href="booking.html" class="nav-link">
             <i class="fas fa-plane"></i>
@@ -58,7 +59,7 @@
           </a>
           <a href="visualizations.html" class="nav-link active">
             <i class="fas fa-images"></i>
-            <span>My Gallery</span>
+            <span>My Trips</span>
           </a>
         </div>
 
@@ -72,154 +73,297 @@
     <main class="main-content">
       <div class="container">
         <!-- Header Section -->
-        <div class="visualizations-header">
-          <div class="step-badge">
-            <i class="fas fa-images"></i>
-            <span>Your Gallery</span>
+        <div class="trips-header">
+          <div class="header-content">
+            <h1 class="trips-title">My Trips</h1>
+            <p class="trips-description">
+              Your travel profile, saved preferences, and trip history. Plan new adventures with your personalized AI assistant.
+            </p>
           </div>
-
-          <h1 class="visualizations-title">My Visualizations</h1>
-
-          <p class="visualizations-description">
-            Your AI-generated travel photos. Relive your virtual adventures and
-            share them with the world.
-          </p>
-        </div>
-
-        <!-- Stats Section -->
-        <div class="stats-section">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-images"></i>
-              </div>
-              <div class="stat-number" id="total-visualizations">0</div>
-              <div class="stat-label">Total Visualizations</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-globe"></i>
-              </div>
-              <div class="stat-number" id="countries-visited">0</div>
-              <div class="stat-label">Countries Visited</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-heart"></i>
-              </div>
-              <div class="stat-number" id="this-week">0</div>
-              <div class="stat-label">This Week</div>
-            </div>
-
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fas fa-calendar"></i>
-              </div>
-              <div class="stat-number" id="recent-count">0</div>
-              <div class="stat-label">This Week</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Search and Filter Section -->
-        <div class="search-filter-section">
-          <div class="search-filter-container">
-            <!-- Search Bar -->
-            <div class="search-container">
-              <i class="fas fa-search search-icon"></i>
-              <input
-                type="text"
-                id="search-input"
-                class="search-input"
-                placeholder="Search your visualizations..."
-              />
-            </div>
-
-            <!-- Filter Buttons -->
-            <div class="filter-buttons">
-              <i class="fas fa-filter filter-icon"></i>
-              <div class="filter-tabs">
-                <button class="filter-tab active" data-filter="all">
-                  <i class="fas fa-images"></i>
-                  <span>All</span>
-                </button>
-                <button class="filter-tab" data-filter="recent">
-                  <i class="fas fa-calendar"></i>
-                  <span>Recent</span>
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Results Summary -->
-          <div class="results-summary">
-            <div class="results-count">
-              <i class="fas fa-images"></i>
-              <span id="results-count">0 visualizations found</span>
-            </div>
-            <button
-              class="clear-filters"
-              id="clear-filters"
-              style="display: none"
-            >
-              Clear filters
-            </button>
-          </div>
-        </div>
-
-        <!-- Loading State -->
-        <div class="loading-state" id="loading-state">
-          <div class="loading-spinner"></div>
-          <p class="loading-text">Loading your visualizations...</p>
-        </div>
-
-        <!-- Gallery Section -->
-        <div class="gallery-section" id="gallery-section" style="display: none">
-          <div class="gallery-grid" id="gallery-grid">
-            <!-- Visualization cards will be dynamically inserted here -->
-          </div>
-        </div>
-
-        <!-- Empty State -->
-        <div class="empty-state" id="empty-state" style="display: none">
-          <div class="empty-icon">
-            <i class="fas fa-images"></i>
-          </div>
-          <h3 class="empty-title">No visualizations found</h3>
-          <p class="empty-description" id="empty-description">
-            You haven't created any visualizations yet. Start by uploading a
-            photo and exploring destinations!
-          </p>
-          <div class="empty-actions" id="empty-actions">
-            <a href="upload.html" class="btn btn-primary"> Upload Photo </a>
-            <a href="destinations.html" class="btn btn-secondary">
-              Explore Destinations
+          <div class="header-actions">
+            <a href="upload.html" class="btn btn-primary">
+              <i class="fas fa-plus"></i>
+              Plan New Trip
             </a>
           </div>
         </div>
 
+        <!-- User Profile Section -->
+        <div class="profile-section">
+          <div class="profile-card">
+            <div class="profile-header">
+              <div class="profile-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div class="profile-info">
+                <h2 class="profile-name" id="profile-name">Traveler</h2>
+                <p class="profile-status">Your preferences are saved for future trips</p>
+              </div>
+              <button class="btn btn-secondary btn-small" id="edit-profile-btn">
+                <i class="fas fa-edit"></i>
+                Edit Profile
+              </button>
+            </div>
+            
+            <div class="profile-details">
+              <div class="profile-grid">
+                <div class="profile-item">
+                  <i class="fas fa-users"></i>
+                  <span class="profile-label">Travel Type</span>
+                  <span class="profile-value" id="travel-type">Not set</span>
+                </div>
+                <div class="profile-item">
+                  <i class="fas fa-dollar-sign"></i>
+                  <span class="profile-label">Budget Range</span>
+                  <span class="profile-value" id="budget-range">Not set</span>
+                </div>
+                <div class="profile-item">
+                  <i class="fas fa-heart"></i>
+                  <span class="profile-label">Interests</span>
+                  <span class="profile-value" id="interests">Not set</span>
+                </div>
+                <div class="profile-item">
+                  <i class="fas fa-calendar"></i>
+                  <span class="profile-label">Last Updated</span>
+                  <span class="profile-value" id="last-updated">Never</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Quick Actions -->
-        <div class="quick-actions" id="quick-actions" style="display: none">
-          <h3 class="quick-actions-title">Quick Actions</h3>
-          <div class="quick-actions-buttons">
-            <button class="quick-action-btn" id="download-all">
-              <i class="fas fa-download"></i>
-              <span>Download All</span>
-            </button>
-            <button class="quick-action-btn" id="share-gallery">
-              <i class="fas fa-share-alt"></i>
-              <span>Share Gallery</span>
-            </button>
-            <button class="quick-action-btn" id="view-recent">
+        <div class="quick-actions">
+          <div class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-magic"></i>
+            </div>
+            <div class="action-content">
+              <h3>Get New Recommendations</h3>
+              <p>Based on your saved preferences</p>
+              <button class="btn btn-primary btn-small" id="quick-recommendations-btn">
+                Get Recommendations
+              </button>
+            </div>
+          </div>
+          
+          <div class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-plane"></i>
+            </div>
+            <div class="action-content">
+              <h3>Book a Trip</h3>
+              <p>Start booking with your preferences</p>
+              <a href="booking.html" class="btn btn-primary btn-small">
+                Start Booking
+              </a>
+            </div>
+          </div>
+          
+          <div class="action-card">
+            <div class="action-icon">
+              <i class="fas fa-camera"></i>
+            </div>
+            <div class="action-content">
+              <h3>Update Photo</h3>
+              <p>Upload a new photo for better recommendations</p>
+              <button class="btn btn-secondary btn-small" id="update-photo-btn">
+                Update Photo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trip History -->
+        <div class="trip-history-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-history"></i>
+              Trip History
+            </h2>
+            <p class="section-description">
+              Your past trips and saved destinations
+            </p>
+          </div>
+
+          <div class="trip-history-grid" id="trip-history-grid">
+            <!-- Trip history will be populated here -->
+            <div class="no-trips-message">
+              <i class="fas fa-suitcase"></i>
+              <h3>No trips yet</h3>
+              <p>Start planning your first adventure!</p>
+              <a href="upload.html" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Plan Your First Trip
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Saved Destinations -->
+        <div class="saved-destinations-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-bookmark"></i>
+              Saved Destinations
+            </h2>
+            <p class="section-description">
+              Destinations you've saved for future trips
+            </p>
+          </div>
+
+          <div class="destinations-grid" id="saved-destinations-grid">
+            <!-- Saved destinations will be populated here -->
+            <div class="no-destinations-message">
               <i class="fas fa-heart"></i>
-              <span>View Recent</span>
-            </button>
+              <h3>No saved destinations</h3>
+              <p>Save destinations you love for future trips</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Recommendations -->
+        <div class="recent-recommendations-section">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-star"></i>
+              Recent Recommendations
+            </h2>
+            <p class="section-description">
+              Destinations recently recommended for you
+            </p>
+          </div>
+
+          <div class="recommendations-grid" id="recent-recommendations-grid">
+            <!-- Recent recommendations will be populated here -->
           </div>
         </div>
       </div>
     </main>
+
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="edit-profile-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Edit Travel Profile</h3>
+          <button class="modal-close" id="close-modal">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        
+        <form class="profile-edit-form" id="profile-edit-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="edit-name">Your Name</label>
+              <input type="text" id="edit-name" name="name" required />
+            </div>
+            
+            <div class="form-group">
+              <label for="edit-age-group">Age Group</label>
+              <select id="edit-age-group" name="ageGroup" required>
+                <option value="18-25">18-25</option>
+                <option value="26-35">26-35</option>
+                <option value="36-50">36-50</option>
+                <option value="51-65">51-65</option>
+                <option value="65+">65+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="edit-travel-type">Travel Type</label>
+              <select id="edit-travel-type" name="travelType" required>
+                <option value="solo">Solo Travel</option>
+                <option value="couple">Couple</option>
+                <option value="family">Family</option>
+                <option value="friends">Friends</option>
+                <option value="business">Business</option>
+                <option value="group">Group Tour</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="edit-budget-range">Budget Range</label>
+              <select id="edit-budget-range" name="budgetRange" required>
+                <option value="500-1000">$500 - $1,000</option>
+                <option value="1000-2500">$1,000 - $2,500</option>
+                <option value="2500-5000">$2,500 - $5,000</option>
+                <option value="5000-10000">$5,000 - $10,000</option>
+                <option value="10000+">$10,000+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Travel Interests</label>
+            <div class="interests-grid">
+              <label class="interest-checkbox">
+                <input type="checkbox" name="interests" value="beach" />
+                <span class="checkbox-custom">
+                  <i class="fas fa-umbrella-beach"></i>
+                  Beach
+                </span>
+              </label>
+              <label class="interest-checkbox">
+                <input type="checkbox" name="interests" value="adventure" />
+                <span class="checkbox-custom">
+                  <i class="fas fa-mountain"></i>
+                  Adventure
+                </span>
+              </label>
+              <label class="interest-checkbox">
+                <input type="checkbox" name="interests" value="luxury" />
+                <span class="checkbox-custom">
+                  <i class="fas fa-crown"></i>
+                  Luxury
+                </span>
+              </label>
+              <label class="interest-checkbox">
+                <input type="checkbox" name="interests" value="heritage" />
+                <span class="checkbox-custom">
+                  <i class="fas fa-landmark"></i>
+                  Heritage
+                </span>
+              </label>
+              <label class="interest-checkbox">
+                <input type="checkbox" name="interests" value="food" />
+                <span class="checkbox-custom">
+                  <i class="fas fa-utensils"></i>
+                  Food
+                </span>
+              </label>
+              <label class="interest-checkbox">
+                <input type="checkbox" name="interests" value="culture" />
+                <span class="checkbox-custom">
+                  <i class="fas fa-theater-masks"></i>
+                  Culture
+                </span>
+              </label>
+              <label class="interest-checkbox">
+                <input type="checkbox" name="interests" value="nature" />
+                <span class="checkbox-custom">
+                  <i class="fas fa-tree"></i>
+                  Nature
+                </span>
+              </label>
+              <label class="interest-checkbox">
+                <input type="checkbox" name="interests" value="relaxation" />
+                <span class="checkbox-custom">
+                  <i class="fas fa-spa"></i>
+                  Relaxation
+                </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancel-edit">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -227,40 +371,16 @@
         <div class="footer-content">
           <div class="footer-logo">
             <div class="footer-logo-icon">
-              <span>AI</span>
+              <i class="fas fa-compass"></i>
             </div>
-            <span class="footer-logo-text">AI Travel</span>
+            <span class="footer-logo-text">WanderAI</span>
           </div>
           <div class="footer-copyright">
-            © 2024 AI Travel. Made with ❤️ for travelers worldwide.
+            Made with ❤️ for travelers worldwide.
           </div>
         </div>
       </div>
     </footer>
-
-    <!-- Lightbox Modal -->
-    <div class="lightbox" id="lightbox">
-      <div class="lightbox-content">
-        <button class="lightbox-close" id="lightbox-close">
-          <i class="fas fa-times"></i>
-        </button>
-        <img id="lightbox-image" class="lightbox-image" alt="Visualization" />
-        <div class="lightbox-info">
-          <h3 id="lightbox-title" class="lightbox-title"></h3>
-          <p id="lightbox-location" class="lightbox-location"></p>
-          <div class="lightbox-actions">
-            <button class="lightbox-action" id="lightbox-download">
-              <i class="fas fa-download"></i>
-              Download
-            </button>
-            <button class="lightbox-action" id="lightbox-share">
-              <i class="fas fa-share-alt"></i>
-              Share
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container"></div>
@@ -269,6 +389,6 @@
     <script src="js/api.js"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/visualizations.js"></script>
+    <script src="js/trips.js"></script>
   </body>
 </html>
