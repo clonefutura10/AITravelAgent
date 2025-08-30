@@ -1,8 +1,11 @@
 // Simple API Service with Fallback Data
 class APIService {
   constructor() {
-    // Use environment variable if available, otherwise fallback to localhost for development
-    this.baseURL = window.API_BASE_URL ? `${window.API_BASE_URL}/api` : "http://localhost:8000/api";
+    // Set the backend URL - change this to your actual backend URL
+    this.baseURL = "http://localhost:8001/api";
+    
+    // For production, you might want to use:
+    // this.baseURL = "https://your-backend-domain.com/api";
   }
 
   async checkBackendHealth() {

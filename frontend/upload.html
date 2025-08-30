@@ -100,6 +100,11 @@
           <div class="progress-line"></div>
           <div class="progress-step" id="step-3">
             <div class="progress-number">3</div>
+            <span class="progress-label">AI Photo Generation</span>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step" id="step-4">
+            <div class="progress-number">4</div>
             <span class="progress-label">Get Recommendations</span>
           </div>
         </div>
@@ -146,6 +151,45 @@
                     <i class="fas fa-edit"></i>
                     Change Photo
                   </button>
+                </div>
+
+                <!-- AI Photo Generation Prompt -->
+                <div class="photo-prompt-area" id="photo-prompt-area" style="display: none;">
+                  <div class="prompt-header">
+                    <h4>
+                      <i class="fas fa-magic"></i>
+                      Generate AI Travel Photos
+                    </h4>
+                    <p>Describe where you want to see yourself in the photo</p>
+                  </div>
+                  
+                  <div class="prompt-input-group">
+                    <textarea 
+                      id="photo-prompt" 
+                      class="prompt-textarea" 
+                      placeholder="e.g., Imagine me in Paris with the Eiffel Tower in the background, wearing a stylish outfit..."
+                      rows="3"
+                    ></textarea>
+                    
+                    <div class="prompt-actions">
+                      <button type="button" class="btn btn-primary" id="generate-photo-btn">
+                        <i class="fas fa-magic"></i>
+                        Generate Photo
+                      </button>
+                      <button type="button" class="btn btn-secondary" id="skip-photo-generation-btn">
+                        <i class="fas fa-forward"></i>
+                        Skip & Continue
+                      </button>
+                    </div>
+                  </div>
+
+                  <!-- Generated Images Display -->
+                  <div class="generated-photos-area" id="generated-photos-area" style="display: none;">
+                    <h5>Generated Photos</h5>
+                    <div class="generated-photos-grid" id="generated-photos-grid">
+                      <!-- Generated photos will appear here -->
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -378,8 +422,109 @@
           </div>
         </div>
 
-        <!-- Step 3: Recommendations -->
+        <!-- Step 3: AI Photo Generation -->
         <div class="planning-section" id="step-3-content" style="display: none;">
+          <div class="ai-generation-section">
+            <div class="section-header">
+              <h2 class="section-title">
+                <i class="fas fa-magic"></i>
+                AI Photo Generation
+              </h2>
+              <p class="section-description">
+                Generate personalized travel photos using AI. Choose your preferred style and destination.
+              </p>
+            </div>
+
+            <div class="generation-grid">
+              <!-- DALL-E Generation -->
+              <div class="generation-card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="fas fa-palette"></i>
+                    DALL-E Generation
+                  </h3>
+                  <p class="card-subtitle">
+                    Create stunning travel images with OpenAI's DALL-E
+                  </p>
+                </div>
+                
+                <div class="generation-input-area">
+                  <div class="input-group">
+                    <label for="dalle-prompt" class="input-label">Describe your dream destination</label>
+                    <textarea id="dalle-prompt" class="text-input" rows="4" placeholder="e.g., A serene beach in Bali with palm trees, crystal clear water, and a beautiful sunset..."></textarea>
+                  </div>
+                  
+                  <div class="input-group">
+                    <label for="dalle-style" class="input-label">Art Style</label>
+                    <select id="dalle-style" class="style-select">
+                      <option value="realistic">Realistic</option>
+                      <option value="artistic">Artistic</option>
+                      <option value="cartoon">Cartoon</option>
+                      <option value="vintage">Vintage</option>
+                      <option value="futuristic">Futuristic</option>
+                    </select>
+                  </div>
+                  
+                  <button class="btn btn-primary generate-btn" id="generate-dalle-btn">
+                    <i class="fas fa-magic"></i>
+                    Generate with DALL-E
+                  </button>
+                </div>
+              </div>
+
+              <!-- Hugging Face Generation -->
+              <div class="generation-card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i class="fas fa-camera"></i>
+                    Hugging Face Face Swap
+                  </h3>
+                  <p class="card-subtitle">
+                    Swap your face into travel destinations using Hugging Face AI
+                  </p>
+                </div>
+                
+                <div class="lightx-upload-area">
+                  <div class="upload-zone" id="lightx-upload-zone">
+                    <div class="upload-content">
+                      <i class="fas fa-cloud-upload-alt"></i>
+                      <h4>Upload your photo for face swap</h4>
+                      <p>or click to browse</p>
+                      <span class="upload-hint">Supports JPG, PNG (max 10MB)</span>
+                    </div>
+                    <input type="file" id="lightx-photo-input" accept="image/*" style="display: none;" />
+                  </div>
+                  
+                  <div class="lightx-input-area">
+                    <div class="input-group">
+                      <label for="lightx-prompt" class="input-label">Describe the destination</label>
+                      <textarea id="lightx-prompt" class="text-input" rows="3" placeholder="e.g., Standing on a beautiful beach in Hawaii with palm trees..."></textarea>
+                    </div>
+                    
+                    <button class="btn btn-primary generate-btn" id="generate-lightx-btn" disabled>
+                      <i class="fas fa-user-edit"></i>
+                      Generate Face Swap
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Generated Images Area -->
+            <div class="generated-images-area">
+              <h3 class="generated-title">Generated Images</h3>
+              <div class="generated-images-grid" id="generated-images-grid">
+                <div class="placeholder-message">
+                  <i class="fas fa-image"></i>
+                  <p>Your generated images will appear here</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Recommendations -->
+        <div class="planning-section" id="step-4-content" style="display: none;">
           <div class="recommendations-section">
             <div class="recommendations-header">
               <h2 class="recommendations-title">
