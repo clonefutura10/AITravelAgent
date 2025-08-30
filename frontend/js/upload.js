@@ -5,7 +5,6 @@ class PlanningInterface {
     this.uploadedPhoto = null;
     this.userProfile = {};
     this.recommendations = [];
-    this.generatedImages = [];
     
     this.initializeElements();
     this.bindEvents();
@@ -22,7 +21,6 @@ class PlanningInterface {
     this.step1Content = document.getElementById('step-1-content');
     this.step2Content = document.getElementById('step-2-content');
     this.step3Content = document.getElementById('step-3-content');
-    this.step4Content = document.getElementById('step-4-content');
     
     // Photo upload elements
     this.uploadZone = document.getElementById('upload-zone');
@@ -36,23 +34,7 @@ class PlanningInterface {
     this.startPlanningBtn = document.getElementById('start-planning-btn');
     this.regenerateBtn = document.getElementById('regenerate-btn');
     
-    // Photo prompt elements
-    this.photoPromptArea = document.getElementById('photo-prompt-area');
-    this.photoPrompt = document.getElementById('photo-prompt');
-    this.generatePhotoBtn = document.getElementById('generate-photo-btn');
-    this.skipPhotoGenerationBtn = document.getElementById('skip-photo-generation-btn');
-    this.generatedPhotosArea = document.getElementById('generated-photos-area');
-    this.generatedPhotosGrid = document.getElementById('generated-photos-grid');
-    
-    // AI Generation elements
-    this.generateDalleBtn = document.getElementById('generate-dalle-btn');
-    this.generateLightxBtn = document.getElementById('generate-lightx-btn');
-    this.dallePrompt = document.getElementById('dalle-prompt');
-    this.dalleStyle = document.getElementById('dalle-style');
-    this.lightxPhotoInput = document.getElementById('lightx-photo-input');
-    this.lightxPrompt = document.getElementById('lightx-prompt');
-    this.lightxUploadZone = document.getElementById('lightx-upload-zone');
-    this.generatedImagesGrid = document.getElementById('generated-images-grid');
+
     
     // Recommendations
     this.recommendationsGrid = document.getElementById('recommendations-grid');
@@ -86,15 +68,7 @@ class PlanningInterface {
     this.startPlanningBtn.addEventListener('click', () => this.startPlanning());
     this.regenerateBtn.addEventListener('click', () => this.regenerateRecommendations());
     
-    // Photo prompt events
-    this.generatePhotoBtn.addEventListener('click', () => this.generatePhotoFromPrompt());
-    this.skipPhotoGenerationBtn.addEventListener('click', () => this.skipPhotoGeneration());
-    
-    // AI Generation events
-    this.generateDalleBtn.addEventListener('click', () => this.generateDalleImage());
-    this.generateLightxBtn.addEventListener('click', () => this.generateLightxImage());
-    this.lightxUploadZone.addEventListener('click', () => this.lightxPhotoInput.click());
-    this.lightxPhotoInput.addEventListener('change', (e) => this.handleLightxPhotoUpload(e));
+
     
     // Interest checkboxes
     this.formFields.interests.forEach(checkbox => {
@@ -156,8 +130,7 @@ class PlanningInterface {
       this.uploadZone.style.display = 'none';
       this.uploadedPhotoDiv.style.display = 'block';
       
-      // Show the photo prompt area
-      this.photoPromptArea.style.display = 'block';
+
       
       this.validateForm();
     };
@@ -169,10 +142,7 @@ class PlanningInterface {
     this.photoInput.value = '';
     this.uploadZone.style.display = 'block';
     this.uploadedPhotoDiv.style.display = 'none';
-    this.photoPromptArea.style.display = 'none';
-    this.generatedPhotosArea.style.display = 'none';
-    this.generatedPhotosGrid.innerHTML = '';
-    this.photoPrompt.value = '';
+
     this.validateForm();
   }
 
@@ -324,270 +294,7 @@ class PlanningInterface {
     }
   }
 
-  // Photo Prompt Generation Methods
-  async generatePhotoFromPrompt() {
-    const prompt = this.photoPrompt.value.trim();
 
-    if (!prompt) {
-      this.showToast('Please enter a description for the photo generation', 'error');
-      return;
-    }
-
-    if (!this.uploadedPhoto) {
-      this.showToast('Please upload a photo first', 'error');
-      return;
-    }
-
-    this.generatePhotoBtn.disabled = true;
-    this.generatePhotoBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-
-    try {
-      const formData = new FormData();
-      formData.append('file', this.uploadedPhoto);
-      formData.append('prompt', prompt);
-
-      const response = await fetch('http://localhost:8001/api/generate-photo-app-image', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate photo');
-      }
-
-      const result = await response.json();
-      
-      if (result.success && result.generated_image_url) {
-        this.addGeneratedPhoto(result.generated_image_url, prompt);
-        this.showToast('Photo generated successfully!', 'success');
-      } else if (result.success && result.image_urls && result.image_urls.length > 0) {
-        // Handle multiple images
-        result.image_urls.forEach((imageUrl, index) => {
-          this.addGeneratedPhoto(imageUrl, `${prompt} (${index + 1})`);
-        });
-        this.showToast(`${result.image_urls.length} photos generated successfully!`, 'success');
-      } else {
-        throw new Error(result.error || 'Failed to generate photo');
-      }
-    } catch (error) {
-      console.error('Photo generation error:', error);
-      this.showToast('Failed to generate photo', 'error');
-    } finally {
-      this.generatePhotoBtn.disabled = false;
-      this.generatePhotoBtn.innerHTML = '<i class="fas fa-magic"></i> Generate Photo';
-    }
-  }
-
-  addGeneratedPhoto(imageUrl, prompt) {
-    const photoItem = document.createElement('div');
-    photoItem.className = 'generated-photo-item';
-    photoItem.innerHTML = `
-      <img src="${imageUrl}" alt="Generated photo" />
-      <div class="generated-photo-info">
-        <p class="generated-photo-prompt">${prompt}</p>
-        <div class="generated-photo-actions">
-          <button class="btn btn-primary btn-small" onclick="window.open('${imageUrl}', '_blank')">
-            <i class="fas fa-external-link-alt"></i> View
-          </button>
-          <button class="btn btn-secondary btn-small" onclick="this.downloadPhoto('${imageUrl}')">
-            <i class="fas fa-download"></i> Download
-          </button>
-        </div>
-      </div>
-    `;
-
-    // Show the generated photos area
-    this.generatedPhotosArea.style.display = 'block';
-    this.generatedPhotosGrid.appendChild(photoItem);
-  }
-
-  downloadPhoto(imageUrl) {
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = `wanderai-generated-${Date.now()}.jpg`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-
-  skipPhotoGeneration() {
-    // Hide the prompt area and continue to next step
-    this.photoPromptArea.style.display = 'none';
-    this.showToast('Photo generation skipped. Continuing to recommendations...', 'info');
-  }
-
-  // AI Photo Generation Methods
-  async generateDalleImage() {
-    const prompt = this.dallePrompt.value.trim();
-    const style = this.dalleStyle.value;
-
-    if (!prompt) {
-      this.showToast('Please enter a description for the image', 'error');
-      return;
-    }
-
-    this.generateDalleBtn.disabled = true;
-    this.generateDalleBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-
-    try {
-      const response = await fetch('http://localhost:8001/api/generate-text-to-image', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          prompt: prompt,
-          style: style
-        })
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate DALL-E image');
-      }
-
-      const result = await response.json();
-      
-      if (result.success && result.image_url) {
-        this.addGeneratedImage(result.image_url, prompt, 'dalle');
-        this.showToast('DALL-E image generated successfully!', 'success');
-      } else {
-        throw new Error(result.error || 'Failed to generate image');
-      }
-    } catch (error) {
-      console.error('DALL-E generation error:', error);
-      this.showToast('Failed to generate DALL-E image', 'error');
-    } finally {
-      this.generateDalleBtn.disabled = false;
-      this.generateDalleBtn.innerHTML = '<i class="fas fa-magic"></i> Generate with DALL-E';
-    }
-  }
-
-  async generateLightxImage() {
-    const prompt = this.lightxPrompt.value.trim();
-    const photoFile = this.lightxPhotoInput.files[0];
-
-    if (!prompt) {
-      this.showToast('Please enter a description for the destination', 'error');
-      return;
-    }
-
-    if (!photoFile) {
-      this.showToast('Please upload a photo for face swap', 'error');
-      return;
-    }
-
-    this.generateLightxBtn.disabled = true;
-    this.generateLightxBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-
-    try {
-      const formData = new FormData();
-      formData.append('file', photoFile);
-      formData.append('prompt', prompt);
-
-      const response = await fetch('http://localhost:8001/api/generate-photo-app-image', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate Hugging Face image');
-      }
-
-      const result = await response.json();
-      
-      if (result.success && result.generated_image_url) {
-        this.addGeneratedImage(result.generated_image_url, prompt, 'huggingface');
-        this.showToast('Hugging Face image generated successfully!', 'success');
-      } else if (result.success && result.image_urls && result.image_urls.length > 0) {
-        // Handle multiple images
-        result.image_urls.forEach((imageUrl, index) => {
-          this.addGeneratedImage(imageUrl, `${prompt} (${index + 1})`, 'huggingface');
-        });
-        this.showToast(`${result.image_urls.length} Hugging Face images generated successfully!`, 'success');
-      } else {
-        throw new Error(result.error || 'Failed to generate image');
-      }
-    } catch (error) {
-      console.error('Hugging Face generation error:', error);
-      this.showToast('Failed to generate Hugging Face image', 'error');
-    } finally {
-      this.generateLightxBtn.disabled = false;
-      this.generateLightxBtn.innerHTML = '<i class="fas fa-user-edit"></i> Generate Face Swap';
-    }
-  }
-
-  handleLightxPhotoUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      this.processLightxPhotoFile(file);
-    }
-  }
-
-  processLightxPhotoFile(file) {
-    // Validate file type and size
-    if (!file.type.startsWith('image/')) {
-      this.showToast('Please select a valid image file', 'error');
-      return;
-    }
-
-    if (file.size > 10 * 1024 * 1024) { // 10MB limit
-      this.showToast('File size must be less than 10MB', 'error');
-      return;
-    }
-
-    // Show preview
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      this.lightxUploadZone.innerHTML = `
-        <div class="upload-content">
-          <img src="${e.target.result}" style="max-width: 200px; max-height: 200px; border-radius: 8px; margin-bottom: 1rem;">
-          <h4>Photo uploaded successfully</h4>
-          <p>Ready for face swap generation</p>
-        </div>
-      `;
-    };
-    reader.readAsDataURL(file);
-
-    // Enable generate button
-    this.generateLightxBtn.disabled = false;
-  }
-
-  addGeneratedImage(imageUrl, prompt, type) {
-    const imageItem = document.createElement('div');
-    imageItem.className = 'generated-image-item';
-    imageItem.innerHTML = `
-      <img src="${imageUrl}" alt="Generated image" class="generated-image">
-      <div class="generated-image-info">
-        <p class="generated-prompt">${prompt}</p>
-        <div class="generated-actions">
-          <button class="generated-action-btn" onclick="window.open('${imageUrl}', '_blank')">
-            <i class="fas fa-external-link-alt"></i> View
-          </button>
-          <button class="generated-action-btn secondary" onclick="this.downloadImage('${imageUrl}', '${type}')">
-            <i class="fas fa-download"></i> Download
-          </button>
-        </div>
-      </div>
-    `;
-
-    // Remove placeholder if it exists
-    const placeholder = this.generatedImagesGrid.querySelector('.placeholder-message');
-    if (placeholder) {
-      placeholder.remove();
-    }
-
-    this.generatedImagesGrid.appendChild(imageItem);
-    this.generatedImages.push({ url: imageUrl, prompt, type });
-  }
-
-  downloadImage(imageUrl, type) {
-    const link = document.createElement('a');
-    link.href = imageUrl;
-    link.download = `wanderai-${type}-${Date.now()}.jpg`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
 
   showToast(message, type = 'info') {
     const toast = document.createElement('div');
@@ -871,7 +578,6 @@ class PlanningInterface {
     this.step1Content.style.display = step === 1 ? 'block' : 'none';
     this.step2Content.style.display = step === 2 ? 'block' : 'none';
     this.step3Content.style.display = step === 3 ? 'block' : 'none';
-    this.step4Content.style.display = step === 4 ? 'block' : 'none';
 
     this.currentStep = step;
   }

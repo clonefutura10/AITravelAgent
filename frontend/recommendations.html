@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Personalized Recommendations - AI Travel Agent</title>
-    <link rel="stylesheet" href="css/style.css?v=999" />
-    <link rel="stylesheet" href="css/booking.css?v=999" />
+    <link rel="stylesheet" href="css/style.css?v=1005" />
+    <link rel="stylesheet" href="css/booking.css?v=1005" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
@@ -108,26 +108,42 @@
       .interest-checkbox {
         display: flex;
         align-items: center;
-        padding: 10px;
-        border: 2px solid #ecf0f1;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
         border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s;
+        background: #ffffff;
+        color: #374151;
+        font-weight: 500;
+        font-size: 14px;
       }
 
       .interest-checkbox:hover {
-        border-color: #3498db;
-        background-color: #f8f9fa;
+        border-color: #6366f1;
+        background-color: #f3f4f6;
+        color: #374151;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
       }
 
       .interest-checkbox input[type="checkbox"] {
         margin-right: 8px;
         transform: scale(1.2);
+        accent-color: #6366f1;
       }
 
       .interest-checkbox.checked {
-        border-color: #3498db;
-        background-color: #e3f2fd;
+        border-color: #6366f1;
+        background-color: #eef2ff;
+        color: #374151;
+      }
+
+      .interest-checkbox span {
+        color: #374151;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 1.4;
       }
 
       .budget-slider {
@@ -653,53 +669,53 @@
           <div class="form-section">
             <h3><i class="fas fa-heart"></i> Travel Interests</h3>
             <div class="interests-grid" id="interestsGrid">
-              <label class="interest-checkbox">
-                <input type="checkbox" value="romantic" />
-                <span>Romantic Getaway</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="romantic" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Romantic Getaway</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="adventure" />
-                <span>Adventure & Outdoor</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="adventure" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Adventure & Outdoor</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="culture" />
-                <span>Cultural Experience</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="culture" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Cultural Experience</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="relaxation" />
-                <span>Relaxation & Wellness</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="relaxation" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Relaxation & Wellness</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="food" />
-                <span>Food & Cuisine</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="food" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Food & Cuisine</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="history" />
-                <span>History & Heritage</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="history" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">History & Heritage</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="nature" />
-                <span>Nature & Wildlife</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="nature" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Nature & Wildlife</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="shopping" />
-                <span>Shopping & Markets</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="shopping" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Shopping & Markets</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="nightlife" />
-                <span>Nightlife & Entertainment</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="nightlife" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Nightlife & Entertainment</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="photography" />
-                <span>Photography</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="photography" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Photography</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="sports" />
-                <span>Sports & Activities</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="sports" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Sports & Activities</span>
               </label>
-              <label class="interest-checkbox">
-                <input type="checkbox" value="luxury" />
-                <span>Luxury & Premium</span>
+              <label class="interest-checkbox" style="display: flex; align-items: center; padding: 12px 16px; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.3s; background: #ffffff; color: #374151; font-weight: 500; font-size: 14px;">
+                <input type="checkbox" value="luxury" style="margin-right: 8px; transform: scale(1.2); accent-color: #6366f1;" />
+                <span style="color: #374151; font-weight: 500; font-size: 14px; line-height: 1.4;">Luxury & Premium</span>
               </label>
             </div>
           </div>

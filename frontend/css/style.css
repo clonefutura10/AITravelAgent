@@ -1295,157 +1295,7 @@ body {
   box-shadow: var(--shadow-lg);
 }
 
-/* Photo Prompt Area */
-.photo-prompt-area {
-  margin-top: var(--spacing-8);
-  padding: var(--spacing-6);
-  background: var(--bg-secondary);
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border-color);
-}
 
-.prompt-header {
-  text-align: center;
-  margin-bottom: var(--spacing-6);
-}
-
-.prompt-header h4 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-3);
-  font-size: var(--font-size-xl);
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-2);
-}
-
-.prompt-header h4 i {
-  color: var(--primary-color);
-}
-
-.prompt-header p {
-  color: var(--text-secondary);
-  margin: 0;
-  font-size: var(--font-size-base);
-}
-
-.prompt-input-group {
-  margin-bottom: var(--spacing-6);
-}
-
-.prompt-textarea {
-  width: 100%;
-  padding: var(--spacing-4);
-  border: 2px solid var(--border-color);
-  border-radius: var(--radius-lg);
-  font-size: var(--font-size-base);
-  font-family: inherit;
-  resize: vertical;
-  transition: border-color var(--transition-fast);
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-4);
-}
-
-.prompt-textarea:focus {
-  outline: none;
-  border-color: var(--primary-color);
-}
-
-.prompt-textarea::placeholder {
-  color: var(--text-muted);
-}
-
-.prompt-actions {
-  display: flex;
-  gap: var(--spacing-4);
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.prompt-actions .btn {
-  min-width: 160px;
-}
-
-/* Generated Photos Area */
-.generated-photos-area {
-  margin-top: var(--spacing-8);
-  padding-top: var(--spacing-6);
-  border-top: 1px solid var(--border-color);
-}
-
-.generated-photos-area h5 {
-  font-size: var(--font-size-lg);
-  font-weight: 600;
-  color: var(--text-primary);
-  margin-bottom: var(--spacing-4);
-  text-align: center;
-}
-
-.generated-photos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: var(--spacing-4);
-}
-
-.generated-photo-item {
-  background: var(--bg-primary);
-  border-radius: var(--radius-lg);
-  padding: var(--spacing-4);
-  border: 1px solid var(--border-color);
-  transition: all var(--transition-fast);
-}
-
-.generated-photo-item:hover {
-  border-color: var(--primary-color);
-  box-shadow: var(--shadow-md);
-}
-
-.generated-photo-item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  margin-bottom: var(--spacing-3);
-}
-
-.generated-photo-info {
-  text-align: center;
-}
-
-.generated-photo-prompt {
-  font-size: var(--font-size-sm);
-  color: var(--text-secondary);
-  margin-bottom: var(--spacing-3);
-  line-height: 1.4;
-}
-
-.generated-photo-actions {
-  display: flex;
-  gap: var(--spacing-2);
-  justify-content: center;
-}
-
-.generated-photo-actions .btn {
-  padding: var(--spacing-2) var(--spacing-3);
-  font-size: var(--font-size-sm);
-}
-
-/* Mobile responsive for photo prompt */
-@media (max-width: 768px) {
-  .prompt-actions {
-    flex-direction: column;
-  }
-  
-  .prompt-actions .btn {
-    width: 100%;
-  }
-  
-  .generated-photos-grid {
-    grid-template-columns: 1fr;
-  }
-}
 
 /* Form Styles */
 .profile-form {
@@ -1980,23 +1830,671 @@ body {
   font-weight: 600;
   text-transform: none;
   letter-spacing: normal;
+  color: var(--text-inverse) !important;
+}
+
+/* Ensure button text is always visible */
+.btn * {
+  color: inherit !important;
+}
+
+.btn i {
+  color: inherit !important;
+}
+
+/* Fix for all button types */
+button, .btn, .generate-btn, .quick-action-btn, .refresh-btn, .upload-btn {
+  color: var(--text-inverse) !important;
+}
+
+button *, .btn *, .generate-btn *, .quick-action-btn *, .refresh-btn *, .upload-btn * {
+  color: inherit !important;
+}
+
+/* Specific fixes for different button types */
+.btn-primary {
+  color: var(--text-inverse) !important;
+}
+
+.btn-secondary {
+  color: var(--text-primary) !important;
+}
+
+.btn-white {
+  color: var(--text-primary) !important;
+}
+
+.btn-outline {
+  color: var(--primary-color) !important;
+}
+
+/* Fix for any buttons that might have transparent text */
+button span, .btn span, .generate-btn span, .quick-action-btn span {
+  color: inherit !important;
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Override any gradient text effects on buttons */
+.btn, button {
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+/* Global button text visibility fix */
+button, .btn, .generate-btn, .quick-action-btn, .refresh-btn, .upload-btn, 
+[class*="btn"], [class*="button"] {
+  color: var(--text-inverse) !important;
+  -webkit-text-fill-color: var(--text-inverse) !important;
+}
+
+button *, .btn *, .generate-btn *, .quick-action-btn *, .refresh-btn *, .upload-btn *,
+[class*="btn"] *, [class*="button"] * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+
+/* Force text visibility on all interactive elements */
+button, .btn, .generate-btn, .quick-action-btn, .refresh-btn, .upload-btn {
+  text-shadow: none !important;
+  filter: none !important;
+}
+
+/* Ensure text is visible regardless of background */
+button, .btn, .generate-btn, .quick-action-btn, .refresh-btn, .upload-btn {
+  mix-blend-mode: normal !important;
+}
+
+/* Fix for navigation menu buttons */
+.nav-link, .nav-link span, .nav-link i {
+  color: var(--text-inverse) !important;
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.nav-link.active, .nav-link.active span, .nav-link.active i {
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Fix for any remaining button text issues */
+a.btn, a.btn span, a.btn i {
+  color: inherit !important;
+  font-weight: inherit !important;
+  text-shadow: inherit !important;
+}
+
+/* Ensure all text elements are visible */
+button *, a.btn *, .btn *, .generate-btn *, .quick-action-btn *, .refresh-btn *, .upload-btn * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Improved contrast for all text elements */
+:root {
+  /* Enhanced contrast colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #404040;
+  --text-muted: #666666;
+  --text-inverse: #ffffff;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --card-bg: #ffffff;
+  --border-color: #d1d5db;
+  --border-dark: #9ca3af;
+}
+
+/* Button text with proper contrast */
+.btn {
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-primary {
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.btn-secondary {
+  background: var(--bg-secondary) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.btn-white {
+  background: var(--text-inverse) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.btn-outline {
+  background: transparent !important;
+  color: var(--primary-color) !important;
+  border: 2px solid var(--primary-color) !important;
+}
+
+/* Navigation links with proper contrast */
+.nav-link {
+  color: var(--text-inverse) !important;
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.nav-link.active {
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Form elements with better contrast */
+input, textarea, select {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border: 2px solid var(--border-color) !important;
+  font-weight: 500 !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted) !important;
+  font-weight: 400 !important;
+}
+
+/* Labels and headings with better contrast */
+label, h1, h2, h3, h4, h5, h6 {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* Card text with better contrast */
+.card, .feature-card, .testimonial-card, .recommendation-card {
+  background: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.card *, .feature-card *, .testimonial-card *, .recommendation-card * {
+  color: var(--text-primary) !important;
+}
+
+/* Hero section text with better contrast */
+.hero-title, .hero-description {
+  color: var(--text-inverse) !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Section text with better contrast */
+.section-title {
+  color: var(--text-primary) !important;
+  font-weight: 700 !important;
+}
+
+.section-description {
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+}
+
+/* Button icons with proper contrast */
+.btn i, .nav-link i {
+  color: inherit !important;
+  text-shadow: inherit !important;
+}
+
+/* Specific button types */
+.generate-btn, .quick-action-btn, .refresh-btn, .upload-btn {
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+.book-hotel-btn, .book-activity-btn, .book-flight-btn, .book-package-btn {
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Additional contrast improvements for specific elements */
+.hero-badge {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+}
+
+.hero-stats .stat-number {
+  color: var(--text-inverse) !important;
+  font-weight: 700 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+.hero-stats .stat-label {
+  color: var(--text-inverse) !important;
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Form labels and descriptions */
+.form-group label {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.form-description, .form-hint {
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+}
+
+/* Card content */
+.card-content, .feature-content, .testimonial-content {
+  color: var(--text-primary) !important;
+}
+
+/* Navigation menu */
+.nav-menu {
+  background: rgba(0, 0, 0, 0.8) !important;
+}
+
+.nav-menu .nav-link {
+  color: var(--text-inverse) !important;
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Ensure all text is readable - but don't override everything */
+p, span, div {
+  color: var(--text-primary);
+}
+
+/* Only override transparent text on buttons and interactive elements */
+button, .btn, .generate-btn, .quick-action-btn, .refresh-btn, .upload-btn, .nav-link {
+  -webkit-text-fill-color: initial !important;
+}
+
+/* Specific fixes for landing page buttons */
+.hero-buttons .btn {
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  text-decoration: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.hero-buttons .btn-primary {
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3) !important;
+}
+
+.hero-buttons .btn-primary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4) !important;
+}
+
+.hero-buttons .btn-secondary {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: var(--text-primary) !important;
+  text-shadow: none !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.hero-buttons .btn-secondary:hover {
+  background: rgba(255, 255, 255, 1) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Ensure button text and icons are visible */
+.hero-buttons .btn i {
+  color: inherit !important;
+  font-size: 1.1rem !important;
+}
+
+.hero-buttons .btn span {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* Fix for recommendations page */
+.generate-btn,
+#generateBtn {
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  font-size: 1.1rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+  justify-content: center !important;
+}
+
+.generate-btn:hover,
+#generateBtn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3) !important;
+}
+
+.generate-btn *,
+#generateBtn * {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* Override any inline styles for buttons */
+.generate-btn,
+#generateBtn,
+.back-btn,
+button[type="submit"],
+button[class*="btn"],
+button[class*="button"] {
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  text-decoration: none !important;
+}
+
+.generate-btn:hover,
+#generateBtn:hover,
+.back-btn:hover,
+button[type="submit"]:hover,
+button[class*="btn"]:hover,
+button[class*="button"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3) !important;
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+}
+
+.generate-btn *,
+#generateBtn *,
+.back-btn *,
+button[type="submit"] *,
+button[class*="btn"] *,
+button[class*="button"] * {
+  color: inherit !important;
+  font-weight: inherit !important;
+  text-shadow: inherit !important;
+}
+
+/* Fix for booking page buttons */
+.booking-form .btn,
+.booking-content .btn,
+#search-flights,
+#search-hotels,
+#search-activities,
+#search-packages {
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.booking-form .btn:hover,
+.booking-content .btn:hover,
+#search-flights:hover,
+#search-hotels:hover,
+#search-activities:hover,
+#search-packages:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Fix for all buttons on recommendations and booking pages */
+.recommendations-container button,
+.booking-container button,
+.preferences-form button,
+.booking-form button,
+.booking-content button {
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.recommendations-container button:hover,
+.booking-container button:hover,
+.preferences-form button:hover,
+.booking-form button:hover,
+.booking-content button:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3) !important;
+}
+
+/* Ensure button text and icons are visible */
+.recommendations-container button *,
+.booking-container button *,
+.preferences-form button *,
+.booking-form button *,
+.booking-content button * {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* Global button fix for all pages */
+button,
+.btn,
+.generate-btn,
+.quick-action-btn,
+.refresh-btn,
+.upload-btn,
+.back-btn,
+[class*="btn"],
+[class*="button"] {
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  text-decoration: none !important;
+  font-size: 1rem !important;
+}
+
+button:hover,
+.btn:hover,
+.generate-btn:hover,
+.quick-action-btn:hover,
+.refresh-btn:hover,
+.upload-btn:hover,
+.back-btn:hover,
+[class*="btn"]:hover,
+[class*="button"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3) !important;
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+}
+
+button *,
+.btn *,
+.generate-btn *,
+.quick-action-btn *,
+.refresh-btn *,
+.upload-btn *,
+.back-btn *,
+[class*="btn"] *,
+[class*="button"] * {
+  color: inherit !important;
+  font-weight: inherit !important;
+  text-shadow: inherit !important;
+}
+
+/* Ensure form elements are visible */
+.form-input, .form-select, .form-textarea {
+  background: white !important;
+  color: var(--text-primary) !important;
+  border: 2px solid var(--border-color) !important;
+  font-weight: 500 !important;
+}
+
+.form-input::placeholder, .form-select::placeholder, .form-textarea::placeholder {
+  color: var(--text-muted) !important;
+  font-weight: 400 !important;
+}
+
+/* Fix for labels */
+.form-group label {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* Additional fixes for recommendations page */
+.recommendations-form, .preferences-form {
+  background: white !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 1rem !important;
+  padding: 2rem !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.recommendations-form input,
+.recommendations-form select,
+.recommendations-form textarea,
+.preferences-form input,
+.preferences-form select,
+.preferences-form textarea {
+  background: white !important;
+  color: var(--text-primary) !important;
+  border: 2px solid var(--border-color) !important;
+  font-weight: 500 !important;
+}
+
+.recommendations-form input:focus,
+.recommendations-form select:focus,
+.recommendations-form textarea:focus,
+.preferences-form input:focus,
+.preferences-form select:focus,
+.preferences-form textarea:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Override inline styles for recommendations page */
+.recommendations-container .form-group label {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.recommendations-container .form-group select,
+.recommendations-container .form-group input,
+.recommendations-container .form-group textarea {
+  color: var(--text-primary) !important;
+  background: white !important;
+  border: 2px solid var(--border-color) !important;
+  font-weight: 500 !important;
+}
+
+.recommendations-container .form-group select:focus,
+.recommendations-container .form-group input:focus,
+.recommendations-container .form-group textarea:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+/* Fix for booking page tabs */
+.booking-tabs {
+  background: white !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.booking-tab {
+  color: var(--text-secondary) !important;
+  font-weight: 500 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+}
+
+.booking-tab.active {
+  color: var(--primary-color) !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid var(--primary-color) !important;
+  background: transparent !important;
+}
+
+/* Fix for any remaining button visibility issues */
+button:not(.gradient-text):not(.city-code) {
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+}
+
+button:not(.gradient-text):not(.city-code) * {
+  color: inherit !important;
 }
 
 /* Fix for form elements */
 input, textarea, select {
-  background: var(--bg-primary);
-  color: var(--text-primary);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-md);
-  padding: var(--spacing-3) var(--spacing-4);
-  font-size: var(--font-size-base);
-  transition: all var(--transition-fast);
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border: 2px solid var(--border-color) !important;
+  border-radius: var(--radius-md) !important;
+  padding: var(--spacing-3) var(--spacing-4) !important;
+  font-size: var(--font-size-base) !important;
+  font-weight: 500 !important;
+  transition: all var(--transition-fast) !important;
 }
 
 input:focus, textarea:focus, select:focus {
-  outline: none;
-  border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  outline: none !important;
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted) !important;
+  font-weight: 400 !important;
 }
 
 /* Fix for links */
@@ -2049,4 +2547,1146 @@ a:hover {
   }
 }
 
-/* ... existing code ... */
+/* AI Visuals Page Styles */
+.hero-section {
+  text-align: center;
+  padding: var(--spacing-16) 0;
+  background: var(--gradient-hero);
+  border-radius: var(--radius-2xl);
+  margin-bottom: var(--spacing-12);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.hero-section .hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-section .hero-title {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  color: var(--text-inverse);
+  margin-bottom: var(--spacing-6);
+  line-height: 1.2;
+}
+
+.hero-section .hero-description {
+  font-size: var(--font-size-lg);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--spacing-8);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-section .hero-stats {
+  display: flex;
+  gap: var(--spacing-8);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-section .stat-item {
+  text-align: center;
+  color: var(--text-inverse);
+}
+
+.hero-section .stat-number {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  margin-bottom: var(--spacing-1);
+  color: var(--text-inverse);
+}
+
+.hero-section .stat-label {
+  font-size: var(--font-size-sm);
+  opacity: 0.8;
+  font-weight: 500;
+  color: var(--text-inverse);
+}
+
+/* Upload Section */
+.upload-section {
+  margin-bottom: var(--spacing-12);
+}
+
+.upload-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-8);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+}
+
+.upload-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.upload-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.upload-title i {
+  color: var(--primary-color);
+}
+
+.upload-description {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.upload-area {
+  margin-bottom: var(--spacing-8);
+}
+
+.upload-zone {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-12) var(--spacing-8);
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  background: var(--bg-secondary);
+}
+
+.upload-zone:hover {
+  border-color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.upload-zone.dragover {
+  border-color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.upload-content i {
+  font-size: var(--font-size-4xl);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-4);
+}
+
+.upload-content h4 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.upload-content p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-2);
+}
+
+.upload-hint {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+}
+
+.uploaded-photo {
+  text-align: center;
+}
+
+.uploaded-photo img {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--spacing-4);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Destination Selection */
+.destination-selection {
+  margin-bottom: var(--spacing-8);
+}
+
+.destination-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-6);
+}
+
+.destination-title i {
+  color: var(--primary-color);
+}
+
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
+.destination-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  border: 2px solid transparent;
+}
+
+.destination-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.destination-card.selected {
+  border-color: var(--primary-color);
+  background: rgba(99, 102, 241, 0.05);
+}
+
+.destination-image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+}
+
+.destination-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.destination-card:hover .destination-image img {
+  transform: scale(1.05);
+}
+
+.destination-info {
+  padding: var(--spacing-4);
+}
+
+.destination-info h4 {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-1);
+}
+
+.destination-info p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* Custom Destination */
+.custom-destination {
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--border-color);
+}
+
+.custom-destination h4 {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-3);
+}
+
+.custom-input-group {
+  display: flex;
+  gap: var(--spacing-3);
+}
+
+.custom-input-group input {
+  flex: 1;
+  padding: var(--spacing-3) var(--spacing-4);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.custom-input-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* Generate Section */
+.generate-section {
+  text-align: center;
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--border-color);
+}
+
+.generate-hint {
+  margin-top: var(--spacing-4);
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+}
+
+.generate-hint i {
+  color: var(--primary-color);
+}
+
+/* Loading Section */
+.loading-section {
+  margin: var(--spacing-12) 0;
+}
+
+.loading-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-12);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  text-align: center;
+}
+
+.loading-spinner {
+  width: 80px;
+  height: 80px;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--spacing-6);
+  animation: spin 2s linear infinite;
+}
+
+.loading-spinner i {
+  font-size: var(--font-size-2xl);
+  color: var(--text-inverse);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-content h3 {
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.loading-content p {
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-8);
+}
+
+/* Results Section */
+.results-section {
+  margin: var(--spacing-12) 0;
+}
+
+.results-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-2xl);
+  padding: var(--spacing-8);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+}
+
+.results-header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.results-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.results-title i {
+  color: var(--primary-color);
+}
+
+.results-description {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+}
+
+.results-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-8);
+}
+
+.result-image-container {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.result-image-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.result-overlay {
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  display: flex;
+  gap: var(--spacing-2);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.result-image-container:hover .result-overlay {
+  opacity: 1;
+}
+
+.result-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.result-destination,
+.result-prompt {
+  background: var(--bg-secondary);
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
+}
+
+.result-destination h4,
+.result-prompt h4 {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.result-destination p,
+.result-prompt p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+.results-actions {
+  display: flex;
+  gap: var(--spacing-4);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Examples Section */
+.examples-section {
+  margin: var(--spacing-12) 0;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-6);
+  margin-top: var(--spacing-8);
+}
+
+.example-card {
+  background: var(--card-bg);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
+}
+
+.example-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.example-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.example-info {
+  padding: var(--spacing-4);
+}
+
+.example-info h4 {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.example-info p {
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* Responsive Design for AI Visuals */
+@media (max-width: 768px) {
+  .hero-section .hero-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .hero-section .hero-stats {
+    gap: var(--spacing-6);
+  }
+  
+  .destinations-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+  
+  .results-content {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-6);
+  }
+  
+  .custom-input-group {
+    flex-direction: column;
+  }
+  
+  .results-actions {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .examples-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* SPECIFIC FIXES FOR RECOMMENDATIONS AND BOOKING PAGES ONLY */
+/* These fixes target only the button text visibility issues on these two pages */
+
+/* Recommendations page button fixes */
+.recommendations-container .generate-btn,
+.recommendations-container #generateBtn {
+  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  border: none !important;
+  padding: 15px 30px !important;
+  border-radius: 10px !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  transition: all 0.3s !important;
+  width: 100% !important;
+  margin-top: 20px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+}
+
+.recommendations-container .generate-btn:hover,
+.recommendations-container #generateBtn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2) !important;
+  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%) !important;
+  color: #ffffff !important;
+}
+
+.recommendations-container .generate-btn *,
+.recommendations-container #generateBtn * {
+  color: #ffffff !important;
+  font-weight: inherit !important;
+  text-shadow: inherit !important;
+}
+
+.recommendations-container .back-btn {
+  background: #6366f1 !important;
+  color: #ffffff !important;
+  border: none !important;
+  padding: 10px 20px !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  transition: background 0.3s !important;
+  margin-bottom: 20px !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+}
+
+.recommendations-container .back-btn:hover {
+  background: #4f46e5 !important;
+  color: #ffffff !important;
+}
+
+.recommendations-container .back-btn * {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* Booking page button fixes */
+.booking-container .btn,
+.booking-container button[class*="btn"],
+.booking-container #search-flights,
+.booking-container #search-hotels,
+.booking-container #search-activities,
+.booking-container #search-packages {
+  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  border-radius: 0.75rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 1rem !important;
+}
+
+.booking-container .btn:hover,
+.booking-container button[class*="btn"]:hover,
+.booking-container #search-flights:hover,
+.booking-container #search-hotels:hover,
+.booking-container #search-activities:hover,
+.booking-container #search-packages:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3) !important;
+  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%) !important;
+  color: #ffffff !important;
+}
+
+.booking-container .btn *,
+.booking-container button[class*="btn"] *,
+.booking-container #search-flights *,
+.booking-container #search-hotels *,
+.booking-container #search-activities *,
+.booking-container #search-packages * {
+  color: #ffffff !important;
+  font-weight: inherit !important;
+  text-shadow: inherit !important;
+}
+
+/* Quick action buttons on booking page */
+.booking-container .quick-action-btn {
+  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+  border: none !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 0.75rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  font-size: 0.9rem !important;
+}
+
+.booking-container .quick-action-btn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.3) !important;
+  background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%) !important;
+  color: #ffffff !important;
+}
+
+.booking-container .quick-action-btn * {
+  color: #ffffff !important;
+  font-weight: inherit !important;
+  text-shadow: inherit !important;
+}
+
+/* Booking tabs - ensure they have proper contrast */
+.booking-container .booking-tab {
+  color: #64748b !important;
+  font-weight: 500 !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 1rem 2rem !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  border-bottom: 2px solid transparent !important;
+}
+
+.booking-container .booking-tab.active {
+  color: #6366f1 !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid #6366f1 !important;
+  background: transparent !important;
+}
+
+.booking-container .booking-tab * {
+  color: inherit !important;
+  font-weight: inherit !important;
+}
+
+/* Override any gradient text effects that might be causing issues */
+.recommendations-container button,
+.booking-container button {
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+.recommendations-container button *,
+.booking-container button * {
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+/* Ensure all text elements in buttons are visible */
+.recommendations-container button span,
+.recommendations-container button i,
+.booking-container button span,
+.booking-container button i {
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: inherit !important;
+}
+
+/* Force proper contrast for button text */
+.recommendations-container .btn,
+.booking-container .btn {
+  mix-blend-mode: normal !important;
+}
+
+.recommendations-container .btn *,
+.booking-container .btn * {
+  mix-blend-mode: normal !important;
+}
+
+/* SPECIFIC FIXES FOR THE SCREENSHOT ISSUES */
+
+/* Fix for Travel Interests buttons on recommendations page */
+.recommendations-container .interest-checkbox {
+  background: #ffffff !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-weight: 500 !important;
+  color: #374151 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+.recommendations-container .interest-checkbox:hover {
+  border-color: #6366f1 !important;
+  background-color: #f3f4f6 !important;
+  color: #374151 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.recommendations-container .interest-checkbox.checked {
+  border-color: #6366f1 !important;
+  background-color: #eef2ff !important;
+  color: #374151 !important;
+}
+
+.recommendations-container .interest-checkbox input[type="checkbox"] {
+  margin-right: 8px !important;
+  transform: scale(1.2) !important;
+  accent-color: #6366f1 !important;
+}
+
+.recommendations-container .interest-checkbox span {
+  color: #374151 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+/* Fix for Instant Travel Booking badge on booking page */
+.booking-container .booking-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+  border-radius: 999px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 1rem !important;
+  color: #374151 !important;
+  font-weight: 600 !important;
+  margin-bottom: 1.5rem !important;
+  backdrop-filter: blur(10px) !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.booking-container .booking-badge span {
+  color: #374151 !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+.booking-container .booking-badge i {
+  color: #6366f1 !important;
+  font-size: 1.1rem !important;
+}
+
+/* Ensure all text elements in these specific areas are visible */
+.recommendations-container .interests-grid .interest-checkbox *,
+.booking-container .booking-badge * {
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: inherit !important;
+}
+
+/* CORRECTED FIXES - Using actual HTML structure */
+
+/* Fix for Travel Interests buttons - direct targeting */
+.interest-checkbox {
+  background: #ffffff !important;
+  border: 2px solid #e2e8f0 !important;
+  border-radius: 8px !important;
+  padding: 12px 16px !important;
+  cursor: pointer !important;
+  transition: all 0.3s ease !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-weight: 500 !important;
+  color: #374151 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+.interest-checkbox span {
+  color: #374151 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+.interest-checkbox:hover {
+  border-color: #6366f1 !important;
+  background-color: #f3f4f6 !important;
+  color: #374151 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.interest-checkbox.checked {
+  border-color: #6366f1 !important;
+  background-color: #eef2ff !important;
+  color: #374151 !important;
+}
+
+.interest-checkbox input[type="checkbox"] {
+  margin-right: 8px !important;
+  transform: scale(1.2) !important;
+  accent-color: #6366f1 !important;
+}
+
+.interest-checkbox span {
+  color: #374151 !important;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+/* Fix for Instant Travel Booking badge - direct targeting */
+.booking-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(99, 102, 241, 0.2) !important;
+  border-radius: 999px !important;
+  padding: 0.75rem 1.5rem !important;
+  font-size: 1rem !important;
+  color: #374151 !important;
+  font-weight: 600 !important;
+  margin-bottom: 1.5rem !important;
+  backdrop-filter: blur(10px) !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+
+.booking-badge span {
+  color: #374151 !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: initial !important;
+  background-clip: initial !important;
+}
+
+.booking-badge i {
+  color: #6366f1 !important;
+  font-size: 1.1rem !important;
+}
+
+.booking-badge i {
+  color: #6366f1 !important;
+  font-size: 1.1rem !important;
+}
+
+/* Force visibility for all elements */
+.interest-checkbox *,
+.booking-badge * {
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: inherit !important;
+}
+
+/* ULTIMATE BUTTON TEXT FIX - ALL BUTTONS BLACK TEXT */
+/* Force ALL button text to be black and visible */
+
+/* All buttons and button-like elements */
+button, 
+.btn, 
+.generate-btn, 
+.quick-action-btn, 
+.refresh-btn, 
+.upload-btn, 
+.back-btn,
+[class*="btn"],
+[class*="button"],
+.nav-link,
+.booking-tab,
+.booking-badge,
+.interest-checkbox,
+input[type="submit"],
+input[type="button"],
+a.btn,
+a[class*="btn"] {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* All text elements inside buttons */
+button *, 
+.btn *, 
+.generate-btn *, 
+.quick-action-btn *, 
+.refresh-btn *, 
+.upload-btn *, 
+.back-btn *,
+[class*="btn"] *,
+[class*="button"] *,
+.nav-link *,
+.booking-tab *,
+.booking-badge *,
+.interest-checkbox *,
+input[type="submit"] *,
+input[type="button"] *,
+a.btn *,
+a[class*="btn"] * {
+  color: #000000 !important;
+  font-weight: inherit !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Specific elements that need black text */
+.booking-badge span,
+.booking-badge i,
+.interest-checkbox span,
+.nav-link span,
+.nav-link i,
+.booking-tab span,
+.booking-tab i,
+button span,
+button i,
+.btn span,
+.btn i {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Override any gradient text effects */
+button, .btn, .nav-link, .booking-tab, .booking-badge, .interest-checkbox {
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+}
+
+/* Ensure visibility */
+button, .btn, .nav-link, .booking-tab, .booking-badge, .interest-checkbox,
+button *, .btn *, .nav-link *, .booking-tab *, .booking-badge *, .interest-checkbox * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ULTIMATE TEXT FIX - ALL TEXT BLACK EXCEPT NAVIGATION */
+/* Force ALL text elements to be black and visible, except navigation menu */
+
+/* ALL TEXT ELEMENTS - EVERYTHING BLACK */
+* {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* NAVIGATION MENU - WHITE TEXT */
+.nav-menu .nav-link,
+.nav-menu .nav-link span,
+.nav-menu .nav-link i {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.nav-menu .nav-link.active,
+.nav-menu .nav-link.active span,
+.nav-menu .nav-link.active i {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* TRIPS PAGE - WHITE TEXT */
+.trips-title,
+.trips-description,
+.profile-name,
+.profile-status,
+.profile-label,
+.profile-value,
+.section-title,
+.section-description,
+.no-trips-message h3,
+.no-trips-message p,
+.no-destinations-message h3,
+.no-destinations-message p,
+.no-recommendations-message h3,
+.no-recommendations-message p,
+.action-content h3,
+.action-content p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* RECOMMENDATIONS PAGE HEADER - WHITE TEXT ONLY */
+.recommendations-header h1,
+.recommendations-header p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Specific text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, label, input, textarea, select, option, button, a {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  text-shadow: none !important;
+}
+
+/* Form elements */
+.form-group label,
+.form-section h3,
+.recommendations-header h1,
+.recommendations-header p,
+.interest-checkbox span,
+.budget-value,
+.form-group select,
+.form-group input,
+.form-group textarea {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  font-weight: 600 !important;
+}
+
+/* All buttons and interactive elements */
+button, .btn, .nav-link, .booking-tab, .booking-badge, .interest-checkbox {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* All text inside buttons */
+button *, .btn *, .nav-link *, .booking-tab *, .booking-badge *, .interest-checkbox * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Override any gradient text effects */
+* {
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+}
+
+/* Ensure visibility */
+* {
+  visibility: visible !important;
+  opacity: 1 !important;
+}

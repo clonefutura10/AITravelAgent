@@ -665,12 +665,17 @@ def get_client_ip(request: Request):
 
 @app.get("/")
 async def root():
-    return {
-        "message": "AI Travel App API v1.0",
-        "status": "running",
-        "timestamp": datetime.now().isoformat(),
-        "version": "1.0.0"
-    }
+    """Serve the main frontend page"""
+    try:
+        with open("../frontend/index.html", "r", encoding="utf-8") as f:
+            return HTMLResponse(content=f.read())
+    except FileNotFoundError:
+        return {
+            "message": "AI Travel App API v1.0",
+            "status": "running",
+            "timestamp": datetime.now().isoformat(),
+            "version": "1.0.0"
+        }
 
 @app.get("/booking")
 async def booking_page():
@@ -746,6 +751,10 @@ async def debug_info():
         },
         "openai": {
             "key_set": bool(os.getenv("OPENAI_API_KEY"))
+        },
+        "huggingface": {
+            "token_set": bool(os.getenv("HUGGINGFACE_TOKEN")),
+            "token_value": os.getenv("HUGGINGFACE_TOKEN", "")[:8] + "..." if os.getenv("HUGGINGFACE_TOKEN") else "Not Set"
         },
         "services": {
             "openai": openai_client is not None
