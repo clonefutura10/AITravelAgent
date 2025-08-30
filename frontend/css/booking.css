@@ -603,14 +603,16 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(99, 102, 241, 0.2);
   border-radius: 999px;
-  padding: 0.5rem 1.25rem;
+  padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  color: var(--primary);
-  font-weight: 500;
+  color: #374151;
+  font-weight: 600;
   margin-bottom: 1.5rem;
   backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .booking-title {
@@ -1111,11 +1113,31 @@
   border-radius: 0.75rem;
   box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
   transition: all 0.3s ease;
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
 }
 
 .btn-small:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(14, 165, 233, 0.4);
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+}
+
+/* Override any conflicting button styles */
+button, .btn {
+  background: var(--gradient-primary) !important;
+  color: var(--text-inverse) !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+  border: none !important;
+}
+
+button *, .btn * {
+  color: inherit !important;
+  font-weight: inherit !important;
 }
 
 /* Enhanced Hotel Card Styles */
@@ -1726,4 +1748,236 @@
   .quick-actions-buttons {
     grid-template-columns: 1fr;
   }
+}
+
+/* ULTIMATE BUTTON TEXT FIX - ALL BUTTONS BLACK TEXT */
+/* Force ALL button text to be black and visible */
+
+/* All buttons and button-like elements */
+button, 
+.btn, 
+.generate-btn, 
+.quick-action-btn, 
+.refresh-btn, 
+.upload-btn, 
+.back-btn,
+[class*="btn"],
+[class*="button"],
+.nav-link,
+.booking-tab,
+.booking-badge,
+.interest-checkbox,
+input[type="submit"],
+input[type="button"],
+a.btn,
+a[class*="btn"],
+.book-flight-btn,
+.book-hotel-btn,
+.book-activity-btn,
+.book-package-btn {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* All text elements inside buttons */
+button *, 
+.btn *, 
+.generate-btn *, 
+.quick-action-btn *, 
+.refresh-btn *, 
+.upload-btn *, 
+.back-btn *,
+[class*="btn"] *,
+[class*="button"] *,
+.nav-link *,
+.booking-tab *,
+.booking-badge *,
+.interest-checkbox *,
+input[type="submit"] *,
+input[type="button"] *,
+a.btn *,
+a[class*="btn"] *,
+.book-flight-btn *,
+.book-hotel-btn *,
+.book-activity-btn *,
+.book-package-btn * {
+  color: #000000 !important;
+  font-weight: inherit !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Specific elements that need black text */
+.booking-badge span,
+.booking-badge i,
+.interest-checkbox span,
+.nav-link span,
+.nav-link i,
+.booking-tab span,
+.booking-tab i,
+button span,
+button i,
+.btn span,
+.btn i,
+.book-flight-btn span,
+.book-flight-btn i,
+.book-hotel-btn span,
+.book-hotel-btn i,
+.book-activity-btn span,
+.book-activity-btn i,
+.book-package-btn span,
+.book-package-btn i {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  text-shadow: none !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Override any gradient text effects */
+button, .btn, .nav-link, .booking-tab, .booking-badge, .interest-checkbox,
+.book-flight-btn, .book-hotel-btn, .book-activity-btn, .book-package-btn {
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+}
+
+/* Ensure visibility */
+button, .btn, .nav-link, .booking-tab, .booking-badge, .interest-checkbox,
+.book-flight-btn, .book-hotel-btn, .book-activity-btn, .book-package-btn,
+button *, .btn *, .nav-link *, .booking-tab *, .booking-badge *, .interest-checkbox *,
+.book-flight-btn *, .book-hotel-btn *, .book-activity-btn *, .book-package-btn * {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* ULTIMATE TEXT FIX - ALL TEXT BLACK EXCEPT NAVIGATION */
+/* Force ALL text elements to be black and visible, except navigation menu */
+
+/* ALL TEXT ELEMENTS - EVERYTHING BLACK */
+* {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* NAVIGATION MENU - WHITE TEXT */
+.nav-menu .nav-link,
+.nav-menu .nav-link span,
+.nav-menu .nav-link i {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  font-weight: 500 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+.nav-menu .nav-link.active,
+.nav-menu .nav-link.active span,
+.nav-menu .nav-link.active i {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  font-weight: 600 !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* TRIPS PAGE - WHITE TEXT */
+.trips-title,
+.trips-description,
+.profile-name,
+.profile-status,
+.profile-label,
+.profile-value,
+.section-title,
+.section-description,
+.no-trips-message h3,
+.no-trips-message p,
+.no-destinations-message h3,
+.no-destinations-message p,
+.no-recommendations-message h3,
+.no-recommendations-message p,
+.action-content h3,
+.action-content p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* RECOMMENDATIONS PAGE HEADER - WHITE TEXT ONLY */
+.recommendations-header h1,
+.recommendations-header p {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Specific text elements */
+h1, h2, h3, h4, h5, h6, p, span, div, label, input, textarea, select, option, button, a {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  text-shadow: none !important;
+}
+
+/* Form elements */
+.form-group label,
+.form-section h3,
+.recommendations-header h1,
+.recommendations-header p,
+.interest-checkbox span,
+.budget-value,
+.form-group select,
+.form-group input,
+.form-group textarea,
+.booking-title,
+.booking-description,
+.booking-badge span {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+  font-weight: 600 !important;
+}
+
+/* All buttons and interactive elements */
+button, .btn, .nav-link, .booking-tab, .booking-badge, .interest-checkbox {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* All text inside buttons */
+button *, .btn *, .nav-link *, .booking-tab *, .booking-badge *, .interest-checkbox * {
+  color: #000000 !important;
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+  mix-blend-mode: normal !important;
+}
+
+/* Override any gradient text effects */
+* {
+  -webkit-text-fill-color: #000000 !important;
+  background-clip: initial !important;
+}
+
+/* Ensure visibility */
+* {
+  visibility: visible !important;
+  opacity: 1 !important;
 }
