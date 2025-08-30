@@ -392,7 +392,7 @@ class RecommendationsPage {
         overlay.style.display = 'flex';
         
         // Call OpenAI API to generate image
-        const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/generate-text-to-image`, {
+        const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/generate-text-to-image`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -481,7 +481,7 @@ class RecommendationsPage {
       const userPrefs = this.getFormData();
 
       const response = await fetch(
-        `${window.API_BASE_URL || 'http://localhost:8000'}/api/generate-detailed-itinerary`,
+        `${window.API_BASE_URL || 'http://localhost:8001'}/api/generate-detailed-itinerary`,
         {
           method: "POST",
           headers: {
@@ -889,7 +889,7 @@ class RecommendationsPage {
     grid.innerHTML =
       '<div style="text-align:center;padding:30px;">Searching for flights...</div>';
     try {
-              const resp = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/search-bookings`, {
+              const resp = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/search-bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(params),
@@ -1221,7 +1221,7 @@ class RecommendationsPage {
       const searchData = this.getFlightSearchData();
       console.log("Flight search data:", searchData);
 
-              const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/search-flights`, {
+              const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/search-flights`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1692,7 +1692,7 @@ class RecommendationsPage {
         currency: "USD",
       };
 
-              const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/book`, {
+              const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/book`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -397,7 +397,7 @@ class TripsPage {
         additionalNotes: null
       };
 
-      const response = await fetch(`${window.API_BASE_URL}/api/generate-personalized-recommendations`, {
+      const response = await fetch(`http://localhost:8001/api/generate-personalized-recommendations`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
