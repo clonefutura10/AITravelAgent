@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
               } else {
                 // For other fields, use the API
                 const response = await fetch(
-                  `${window.API_BASE_URL || 'http://localhost:8001'}/api/destination-suggestions?query=${encodeURIComponent(
+                  `${window.API_BASE_URL || 'http://localhost:8000'}/api/destination-suggestions?query=${encodeURIComponent(
                     query
                   )}`
                 );
@@ -449,7 +449,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Flight search data:", searchData);
 
         const response = await fetch(
-          `${window.API_BASE_URL || 'http://localhost:8001'}/api/search-flights`,
+          `${window.API_BASE_URL || 'http://localhost:8000'}/api/search-flights`,
           {
             method: "POST",
             headers: {
@@ -501,7 +501,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         const response = await fetch(
-          `${window.API_BASE_URL || 'http://localhost:8001'}/api/search-hotels`,
+          `${window.API_BASE_URL || 'http://localhost:8000'}/api/search-hotels`,
           {
             method: "POST",
             headers: {
@@ -539,7 +539,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Use the existing endpoint for other types
         const searchData = getSearchData(type);
         const response = await fetch(
-          `${window.API_BASE_URL || 'http://localhost:8001'}/api/search-bookings`,
+          `${window.API_BASE_URL || 'http://localhost:8000'}/api/search-bookings`,
           {
             method: "POST",
             headers: {
@@ -1511,7 +1511,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       // Submit booking to API
-      const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/book`, {
+      const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/book`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

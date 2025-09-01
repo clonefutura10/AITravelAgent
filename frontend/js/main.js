@@ -34,15 +34,43 @@ class TravelAgentApp {
     });
 
     // Setup smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-      anchor.addEventListener("click", function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute("href"));
-        if (target) {
-          ui.scrollToElement(target);
+    try {
+      const anchors = document.querySelectorAll('a[href^="#"]');
+      console.log(`Found ${anchors.length} anchor links with href starting with #`);
+      
+      anchors.forEach((anchor, index) => {
+        const href = anchor.getAttribute("href");
+        
+        // Skip links with empty or invalid href attributes
+        if (!href || href === "#" || href === "#!" || href.length <= 1) {
+          console.log(`Skipping anchor ${index} with invalid href: "${href}"`);
+          return;
         }
+        
+        // Additional validation to ensure href is a valid CSS selector
+        if (!href.match(/^#[a-zA-Z][\w-]*$/) && !href.match(/^#[a-zA-Z][\w-]*\[.*\]$/)) {
+          console.warn(`Skipping anchor ${index} with invalid selector: "${href}"`);
+          return;
+        }
+        
+        console.log(`Setting up smooth scrolling for anchor ${index} with href: "${href}"`);
+        
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          
+          try {
+            const target = document.querySelector(href);
+            if (target && ui && typeof ui.scrollToElement === 'function') {
+              ui.scrollToElement(target);
+            }
+          } catch (error) {
+            console.warn(`Error with selector "${href}":`, error.message);
+          }
+        });
       });
-    });
+    } catch (error) {
+      console.error("Error setting up smooth scrolling:", error);
+    }
   }
 
   getPageUrl(page) {

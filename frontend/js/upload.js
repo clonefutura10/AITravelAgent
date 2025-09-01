@@ -1,607 +1,490 @@
-// Planning Interface JavaScript
-class PlanningInterface {
+// AI Generation Page JavaScript
+class UploadPage {
   constructor() {
-    this.currentStep = 1;
-    this.uploadedPhoto = null;
-    this.userProfile = {};
-    this.recommendations = [];
+    console.log("APIService available:", typeof APIService);
+    console.log("APIService constructor:", APIService);
     
-    this.initializeElements();
-    this.bindEvents();
-    this.setupDateValidation();
+    if (typeof APIService === 'undefined') {
+      console.error("APIService is not defined! Check if api.js is loaded properly.");
+      this.api = null;
+    } else {
+      this.api = new APIService();
+      console.log("API instance created:", this.api);
+      console.log("API methods:", Object.getOwnPropertyNames(Object.getPrototypeOf(this.api)));
+      
+      // Test if generateVisualization method exists
+      console.log("generateVisualization method exists:", typeof this.api.generateVisualization);
+      console.log("generateVisualization is function:", typeof this.api.generateVisualization === 'function');
+      
+      if (typeof this.api.generateVisualization === 'function') {
+        console.log("✅ generateVisualization method is available!");
+      } else {
+        console.error("❌ generateVisualization method is missing!");
+      }
+    }
+    
+    this.currentFile = null;
+    this.selectedDestination = null;
+    this.init();
+    
+    // Make instance globally accessible for download function calls
+    window.uploadPage = this;
   }
 
-  initializeElements() {
-    // Progress elements
-    this.progressSteps = document.querySelectorAll('.progress-step');
-    this.progressFill = document.getElementById('progress-fill');
-    this.progressStepItems = document.querySelectorAll('.progress-step-item');
-    
-    // Content sections
-    this.step1Content = document.getElementById('step-1-content');
-    this.step2Content = document.getElementById('step-2-content');
-    this.step3Content = document.getElementById('step-3-content');
-    
-    // Photo upload elements
-    this.uploadZone = document.getElementById('upload-zone');
-    this.photoInput = document.getElementById('photo-input');
-    this.uploadedPhotoDiv = document.getElementById('uploaded-photo');
-    this.photoPreview = document.getElementById('photo-preview');
-    this.changePhotoBtn = document.getElementById('change-photo-btn');
-    
-    // Form elements
-    this.profileForm = document.getElementById('profile-form');
-    this.startPlanningBtn = document.getElementById('start-planning-btn');
-    this.regenerateBtn = document.getElementById('regenerate-btn');
-    
-
-    
-    // Recommendations
-    this.recommendationsGrid = document.getElementById('recommendations-grid');
-    
-    // Form fields
-    this.formFields = {
-      name: document.getElementById('traveler-name'),
-      ageGroup: document.getElementById('age-group'),
-      travelType: document.getElementById('travel-type'),
-      budgetRange: document.getElementById('budget-range'),
-      tripDuration: document.getElementById('trip-duration'),
-      travelDates: document.getElementById('travel-dates'),
-      additionalNotes: document.getElementById('additional-notes'),
-      interests: document.querySelectorAll('input[name="interests"]')
-    };
+  init() {
+    console.log("Initializing UploadPage...");
+    this.setupFileUpload();
+    this.setupDestinationSelection();
+    this.setupCustomDestination();
+    this.setupGenerateButton();
+    this.checkBackendStatus();
+    console.log("UploadPage initialized successfully");
   }
 
-  bindEvents() {
-    // Photo upload events
-    this.uploadZone.addEventListener('click', () => this.photoInput.click());
-    this.photoInput.addEventListener('change', (e) => this.handlePhotoUpload(e));
-    this.changePhotoBtn.addEventListener('click', () => this.resetPhotoUpload());
-    
-    // Drag and drop events
-    this.uploadZone.addEventListener('dragover', (e) => this.handleDragOver(e));
-    this.uploadZone.addEventListener('dragleave', (e) => this.handleDragLeave(e));
-    this.uploadZone.addEventListener('drop', (e) => this.handleDrop(e));
-    
-    // Form events
-    this.profileForm.addEventListener('input', () => this.validateForm());
-    this.startPlanningBtn.addEventListener('click', () => this.startPlanning());
-    this.regenerateBtn.addEventListener('click', () => this.regenerateRecommendations());
-    
+  async checkBackendStatus() {
+    try {
+      const backendAvailable = await this.api.checkBackendHealth();
+      if (!backendAvailable) {
+        this.showToast("Backend server is not available. Using demo mode.", "warning");
+      } else {
+        console.log("Backend is available");
+      }
+    } catch (error) {
+      console.error("Backend check failed:", error);
+      this.showToast("Backend server is not available. Using demo mode.", "warning");
+    }
+  }
 
-    
-    // Interest checkboxes
-    this.formFields.interests.forEach(checkbox => {
-      checkbox.addEventListener('change', () => this.validateForm());
+  setupFileUpload() {
+    console.log("Setting up file upload...");
+    const dropZone = document.querySelector("#photo-upload");
+    const fileInput = document.querySelector("#file-input");
+    const browseLink = document.querySelector("#browse-link");
+
+    if (!dropZone || !fileInput || !browseLink) {
+      console.error("Required elements not found:", { dropZone: !!dropZone, fileInput: !!fileInput, browseLink: !!browseLink });
+      return;
+    }
+
+    // Click to browse
+    browseLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      console.log("Browse link clicked");
+      fileInput.click();
     });
+
+    // File input change
+    fileInput.addEventListener("change", (e) => {
+      console.log("File input changed");
+      if (e.target.files.length > 0) {
+        this.handleFileSelect(e.target.files[0]);
+      }
+    });
+
+    // Drag and drop
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.classList.add("drag-over");
+    });
+
+    dropZone.addEventListener("dragleave", () => {
+      dropZone.classList.remove("drag-over");
+    });
+
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("drag-over");
+      
+      const files = e.dataTransfer.files;
+      if (files.length > 0) {
+        console.log("File dropped:", files[0].name);
+        this.handleFileSelect(files[0]);
+      }
+    });
+
+    console.log("File upload setup complete");
   }
 
-  setupDateValidation() {
-    // Set minimum date to today
-    const today = new Date().toISOString().split('T')[0];
-    this.formFields.travelDates.min = today;
-  }
-
-  handlePhotoUpload(event) {
-    const file = event.target.files[0];
-    if (file) {
-      this.processPhotoFile(file);
-    }
-  }
-
-  handleDragOver(event) {
-    event.preventDefault();
-    this.uploadZone.classList.add('dragover');
-  }
-
-  handleDragLeave(event) {
-    event.preventDefault();
-    this.uploadZone.classList.remove('dragover');
-  }
-
-  handleDrop(event) {
-    event.preventDefault();
-    this.uploadZone.classList.remove('dragover');
+  handleFileSelect(file) {
+    console.log("Handling file selection:", file.name, file.type, file.size);
     
-    const files = event.dataTransfer.files;
-    if (files.length > 0) {
-      this.processPhotoFile(files[0]);
+    // Validate file type
+    if (!file.type.startsWith("image/")) {
+      this.showToast("Please select an image file.", "error");
+      return;
     }
+
+    // Validate file size (10MB limit)
+    if (file.size > 10 * 1024 * 1024) {
+      this.showToast("File size must be less than 10MB.", "error");
+      return;
+    }
+
+    this.currentFile = file;
+    this.displayFilePreview(file);
+    this.updateGenerateButton();
+    this.showToast("Photo uploaded successfully!", "success");
   }
 
-  processPhotoFile(file) {
-    // Validate file type
-    if (!file.type.startsWith('image/')) {
-      this.showToast('Please select a valid image file', 'error');
-      return;
-    }
-
-    // Validate file size (10MB max)
-    if (file.size > 10 * 1024 * 1024) {
-      this.showToast('File size must be less than 10MB', 'error');
-      return;
-    }
+  displayFilePreview(file) {
+    const dropZone = document.querySelector("#photo-upload");
+    if (!dropZone) return;
 
     // Create preview
     const reader = new FileReader();
     reader.onload = (e) => {
-      this.uploadedPhoto = file;
-      this.photoPreview.src = e.target.result;
-      this.uploadZone.style.display = 'none';
-      this.uploadedPhotoDiv.style.display = 'block';
-      
+      dropZone.innerHTML = `
+        <div class="upload-preview">
+          <img src="${e.target.result}" alt="Uploaded photo" class="preview-image">
+          <div class="preview-overlay">
+            <button class="btn btn-secondary btn-small" id="change-photo">
+              <i class="fas fa-edit"></i>
+              Change Photo
+            </button>
+          </div>
+        </div>
+      `;
 
-      
-      this.validateForm();
+      // Add change photo functionality
+      const changeBtn = document.querySelector("#change-photo");
+      if (changeBtn) {
+        changeBtn.addEventListener("click", () => {
+          this.resetUploadArea();
+        });
+      }
     };
     reader.readAsDataURL(file);
   }
 
-  resetPhotoUpload() {
-    this.uploadedPhoto = null;
-    this.photoInput.value = '';
-    this.uploadZone.style.display = 'block';
-    this.uploadedPhotoDiv.style.display = 'none';
+  resetUploadArea() {
+    const dropZone = document.querySelector("#photo-upload");
+    if (!dropZone) return;
 
-    this.validateForm();
-  }
-
-  validateForm() {
-    const requiredFields = [
-      this.formFields.name,
-      this.formFields.ageGroup,
-      this.formFields.travelType,
-      this.formFields.budgetRange
-    ];
-
-    const hasRequiredFields = requiredFields.every(field => field.value.trim() !== '');
-    const hasInterests = Array.from(this.formFields.interests).some(checkbox => checkbox.checked);
-    const hasPhoto = this.uploadedPhoto !== null;
-
-    const isValid = hasRequiredFields && hasInterests && hasPhoto;
-    
-    this.startPlanningBtn.disabled = !isValid;
-    
-    if (isValid) {
-      this.startPlanningBtn.classList.remove('btn-disabled');
-    } else {
-      this.startPlanningBtn.classList.add('btn-disabled');
-    }
-
-    return isValid;
-  }
-
-  collectFormData() {
-    const interests = Array.from(this.formFields.interests)
-      .filter(checkbox => checkbox.checked)
-      .map(checkbox => checkbox.value);
-
-    return {
-      name: this.formFields.name.value.trim(),
-      ageGroup: this.formFields.ageGroup.value,
-      travelType: this.formFields.travelType.value,
-      budgetRange: this.formFields.budgetRange.value,
-      tripDuration: this.formFields.tripDuration.value || null,
-      travelDates: this.formFields.travelDates.value || null,
-      additionalNotes: this.formFields.additionalNotes.value.trim() || null,
-      interests: interests
-    };
-  }
-
-  async startPlanning() {
-    if (!this.validateForm()) {
-      this.showToast('Please fill in all required fields', 'error');
-      return;
-    }
-
-    this.userProfile = this.collectFormData();
-    
-    // Save user profile to localStorage for future trips
-    localStorage.setItem('wanderai_user_profile', JSON.stringify({
-      ...this.userProfile,
-      lastUpdated: new Date().toISOString()
-    }));
-    
-    // Move to step 2
-    this.goToStep(2);
-    
-    try {
-      // Upload photo first
-      const photoUrl = await this.uploadPhoto();
-      
-      // Generate recommendations
-      await this.generateRecommendations(photoUrl);
-      
-      // Save recommendations to localStorage
-      if (this.recommendations && this.recommendations.length > 0) {
-        localStorage.setItem('wanderai_recent_recommendations', JSON.stringify(this.recommendations));
-      }
-      
-      // Move to step 3 (AI Generation)
-      this.goToStep(3);
-      
-    } catch (error) {
-      console.error('Planning failed:', error);
-      this.showToast('Failed to generate recommendations. Please try again.', 'error');
-      this.goToStep(1);
-    }
-  }
-
-  async uploadPhoto() {
-    if (!this.uploadedPhoto) {
-      throw new Error('No photo uploaded');
-    }
-
-    const formData = new FormData();
-    formData.append('file', this.uploadedPhoto);
-
-    try {
-      const response = await fetch('http://localhost:8001/api/upload-photo', {
-        method: 'POST',
-        body: formData
-      });
-
-      if (!response.ok) {
-        throw new Error('Photo upload failed');
-      }
-
-      const result = await response.json();
-      return result.photo_url;
-    } catch (error) {
-      console.error('Photo upload error:', error);
-      throw error;
-    }
-  }
-
-  async generateRecommendations(photoUrl) {
-    // Simulate AI analysis progress
-    await this.simulateAnalysisProgress();
-
-    // Prepare recommendation request
-    const requestData = {
-      ageGroup: this.userProfile.ageGroup,
-      groupSize: this.userProfile.travelType,
-      budgetRange: this.parseBudgetRange(this.userProfile.budgetRange),
-      tripDuration: this.userProfile.tripDuration || 'week',
-      interests: this.userProfile.interests,
-      additionalNotes: this.userProfile.additionalNotes
-    };
-
-    try {
-      const response = await fetch('http://localhost:8001/api/generate-personalized-recommendations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestData)
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to generate recommendations');
-      }
-
-      const result = await response.json();
-      
-      if (result.success && result.data) {
-        this.recommendations = result.data.destinations || [];
-        this.displayRecommendations();
-      } else {
-        throw new Error(result.error || 'No recommendations generated');
-      }
-    } catch (error) {
-      console.error('Recommendations error:', error);
-      throw error;
-    }
-  }
-
-
-
-  showToast(message, type = 'info') {
-    const toast = document.createElement('div');
-    toast.className = `toast ${type}`;
-    toast.innerHTML = `
-      <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
-      <span>${message}</span>
+    dropZone.innerHTML = `
+      <div class="upload-icon">
+        <i class="fas fa-cloud-upload-alt"></i>
+      </div>
+      <h3 class="upload-heading">Drop your photo here</h3>
+      <p class="upload-subtext">
+        <a href="javascript:void(0)" id="browse-link">or click to browse</a>
+      </p>
+      <p class="upload-note">Supports JPG, PNG, WEBP (max 10MB)</p>
     `;
 
-    const container = document.getElementById('toast-container');
-    container.appendChild(toast);
-
-    setTimeout(() => {
-      toast.remove();
-    }, 5000);
+    // Re-setup file upload
+    this.setupFileUpload();
+    this.currentFile = null;
+    this.updateGenerateButton();
   }
 
-  parseBudgetRange(budgetRange) {
-    const budgetMap = {
-      '500-1000': 750,
-      '1000-2500': 1750,
-      '2500-5000': 3750,
-      '5000-10000': 7500,
-      '10000+': 12000
-    };
-    return budgetMap[budgetRange] || 2000;
-  }
-
-  async simulateAnalysisProgress() {
-    const steps = ['Analyzing photo', 'Processing preferences', 'Finding destinations', 'Creating recommendations'];
-    const progressBar = this.progressFill;
-    const stepItems = this.progressStepItems;
-
-    for (let i = 0; i < steps.length; i++) {
-      // Update progress bar
-      const progress = ((i + 1) / steps.length) * 100;
-      progressBar.style.width = `${progress}%`;
-
-      // Update step indicators
-      if (i > 0) {
-        stepItems[i - 1].classList.remove('active');
-        stepItems[i - 1].classList.add('completed');
-      }
-      stepItems[i].classList.add('active');
-
-      // Wait before next step
-      await this.delay(1000 + Math.random() * 1000);
-    }
-
-    // Complete all steps
-    stepItems.forEach(item => {
-      item.classList.remove('active');
-      item.classList.add('completed');
+  setupDestinationSelection() {
+    console.log("Setting up destination selection...");
+    const destinationOptions = document.querySelectorAll(".destination-option");
+    
+    destinationOptions.forEach(option => {
+      option.addEventListener("click", () => {
+        // Remove previous selection
+        destinationOptions.forEach(opt => opt.classList.remove("selected"));
+        
+        // Select current option
+        option.classList.add("selected");
+        
+        // Get destination info
+        const destinationText = option.dataset.destination || option.querySelector("span").textContent;
+        this.selectedDestination = destinationText;
+        
+        this.updateGenerateButton();
+        this.showToast(`Selected: ${destinationText}`, "success");
+      });
     });
+
+    console.log("Destination selection setup complete");
   }
 
-  displayRecommendations() {
-    if (!this.recommendations || this.recommendations.length === 0) {
-      this.recommendationsGrid.innerHTML = `
-        <div class="no-recommendations">
-          <i class="fas fa-search"></i>
-          <h3>No recommendations found</h3>
-          <p>Try adjusting your preferences or try again later.</p>
-        </div>
-      `;
+  setupCustomDestination() {
+    console.log("Setting up custom destination...");
+    const customInput = document.querySelector("#custom-destination");
+    const generateCustomBtn = document.querySelector("#generate-custom");
+    
+    if (!customInput || !generateCustomBtn) {
+      console.error("Custom destination elements not found");
       return;
     }
 
-    let recommendationsHTML = '';
-
-    // Destinations Section
-    if (this.recommendations.destinations && this.recommendations.destinations.length > 0) {
-      recommendationsHTML += `
-        <div class="recommendations-section">
-          <h3 class="section-subtitle">
-            <i class="fas fa-map-marker-alt"></i>
-            Recommended Destinations
-          </h3>
-          <div class="recommendations-grid">
-            ${this.recommendations.destinations.map(destination => `
-              <div class="recommendation-card">
-                <img src="${destination.image_url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop&q=80'}" alt="${destination.name}" class="recommendation-image" />
-                <div class="recommendation-content">
-                  <h3 class="recommendation-title">${destination.name}</h3>
-                  <p class="recommendation-location">${destination.country || 'Travel Destination'}</p>
-                  <p class="recommendation-description">${destination.description || 'A beautiful travel destination perfect for your preferences.'}</p>
-                  
-                  <div class="recommendation-meta">
-                    <div class="recommendation-rating">
-                      <i class="fas fa-star"></i>
-                      <span>${destination.rating || '4.5'}</span>
-                    </div>
-                    <div class="recommendation-price">${destination.price || '$$'}</div>
-                  </div>
-                  
-                  <div class="recommendation-highlights">
-                    ${destination.highlights ? destination.highlights.slice(0, 3).map(highlight => 
-                      `<span class="recommendation-highlight">${highlight}</span>`
-                    ).join('') : '<span class="recommendation-highlight">Local Attractions</span><span class="recommendation-highlight">Cultural Sites</span><span class="recommendation-highlight">Natural Beauty</span>'}
-                  </div>
-                  
-                  <button class="btn btn-primary btn-small" onclick="planningInterface.viewDestination('${destination.id}')">
-                    <i class="fas fa-eye"></i>
-                    View Details
-                  </button>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }
-
-    // Accommodations Section
-    if (this.recommendations.accommodations && this.recommendations.accommodations.length > 0) {
-      recommendationsHTML += `
-        <div class="recommendations-section">
-          <h3 class="section-subtitle">
-            <i class="fas fa-bed"></i>
-            Recommended Accommodations
-          </h3>
-          <div class="recommendations-grid">
-            ${this.recommendations.accommodations.map(accommodation => `
-              <div class="recommendation-card">
-                <img src="${accommodation.image_url || 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop&q=80'}" alt="${accommodation.name}" class="recommendation-image" />
-                <div class="recommendation-content">
-                  <h3 class="recommendation-title">${accommodation.name}</h3>
-                  <p class="recommendation-location">${accommodation.location || 'Hotel Location'}</p>
-                  <p class="recommendation-description">${accommodation.description || 'A comfortable accommodation option for your stay.'}</p>
-                  
-                  <div class="recommendation-meta">
-                    <div class="recommendation-rating">
-                      <i class="fas fa-star"></i>
-                      <span>${accommodation.rating || '4.5'}</span>
-                    </div>
-                    <div class="recommendation-price">${accommodation.price || '$$'}</div>
-                  </div>
-                  
-                  <div class="recommendation-highlights">
-                    ${accommodation.amenities ? accommodation.amenities.slice(0, 3).map(amenity => 
-                      `<span class="recommendation-highlight">${amenity}</span>`
-                    ).join('') : '<span class="recommendation-highlight">Free WiFi</span><span class="recommendation-highlight">Breakfast</span><span class="recommendation-highlight">Pool</span>'}
-                  </div>
-                  
-                  <button class="btn btn-primary btn-small" onclick="planningInterface.viewAccommodation('${accommodation.id}')">
-                    <i class="fas fa-bed"></i>
-                    Book Now
-                  </button>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }
-
-    // Restaurants Section
-    if (this.recommendations.restaurants && this.recommendations.restaurants.length > 0) {
-      recommendationsHTML += `
-        <div class="recommendations-section">
-          <h3 class="section-subtitle">
-            <i class="fas fa-utensils"></i>
-            Recommended Restaurants
-          </h3>
-          <div class="recommendations-grid">
-            ${this.recommendations.restaurants.map(restaurant => `
-              <div class="recommendation-card">
-                <img src="${restaurant.image_url || 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop&q=80'}" alt="${restaurant.name}" class="recommendation-image" />
-                <div class="recommendation-content">
-                  <h3 class="recommendation-title">${restaurant.name}</h3>
-                  <p class="recommendation-location">${restaurant.location || 'Restaurant Location'}</p>
-                  <p class="recommendation-description">${restaurant.description || 'A delicious dining option for your trip.'}</p>
-                  
-                  <div class="recommendation-meta">
-                    <div class="recommendation-rating">
-                      <i class="fas fa-star"></i>
-                      <span>${restaurant.rating || '4.5'}</span>
-                    </div>
-                    <div class="recommendation-price">${restaurant.price || '$$'}</div>
-                  </div>
-                  
-                  <div class="recommendation-highlights">
-                    ${restaurant.cuisine ? restaurant.cuisine.slice(0, 3).map(cuisine => 
-                      `<span class="recommendation-highlight">${cuisine}</span>`
-                    ).join('') : '<span class="recommendation-highlight">Local Cuisine</span><span class="recommendation-highlight">Fine Dining</span><span class="recommendation-highlight">Fresh Ingredients</span>'}
-                  </div>
-                  
-                  <button class="btn btn-primary btn-small" onclick="planningInterface.viewRestaurant('${restaurant.id}')">
-                    <i class="fas fa-utensils"></i>
-                    Reserve Table
-                  </button>
-                </div>
-              </div>
-            `).join('')}
-          </div>
-        </div>
-      `;
-    }
-
-    // If no structured data, fall back to simple destinations array
-    if (!recommendationsHTML && Array.isArray(this.recommendations)) {
-      recommendationsHTML = this.recommendations.map(destination => `
-        <div class="recommendation-card">
-          <img src="${destination.image_url || 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop&q=80'}" alt="${destination.name}" class="recommendation-image" />
-          <div class="recommendation-content">
-            <h3 class="recommendation-title">${destination.name}</h3>
-            <p class="recommendation-location">${destination.country || 'Travel Destination'}</p>
-            <p class="recommendation-description">${destination.description || 'A beautiful travel destination perfect for your preferences.'}</p>
-            
-            <div class="recommendation-meta">
-              <div class="recommendation-rating">
-                <i class="fas fa-star"></i>
-                <span>${destination.rating || '4.5'}</span>
-              </div>
-              <div class="recommendation-price">${destination.price || '$$'}</div>
-            </div>
-            
-            <div class="recommendation-highlights">
-              ${destination.highlights ? destination.highlights.slice(0, 3).map(highlight => 
-                `<span class="recommendation-highlight">${highlight}</span>`
-              ).join('') : '<span class="recommendation-highlight">Local Attractions</span><span class="recommendation-highlight">Cultural Sites</span><span class="recommendation-highlight">Natural Beauty</span>'}
-            </div>
-            
-            <button class="btn btn-primary btn-small" onclick="planningInterface.viewDestination('${destination.id}')">
-              <i class="fas fa-eye"></i>
-              View Details
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    this.recommendationsGrid.innerHTML = recommendationsHTML;
-  }
-
-  async regenerateRecommendations() {
-    this.regenerateBtn.disabled = true;
-    this.regenerateBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
-    
-    try {
-      await this.generateRecommendations();
-      this.showToast('New recommendations generated!', 'success');
-    } catch (error) {
-      this.showToast('Failed to generate new recommendations', 'error');
-    } finally {
-      this.regenerateBtn.disabled = false;
-      this.regenerateBtn.innerHTML = '<i class="fas fa-refresh"></i> Get More Recommendations';
-    }
-  }
-
-  viewDestination(destinationId) {
-    // Navigate to destination details or booking page
-    window.location.href = `booking.html?destination=${destinationId}`;
-  }
-
-  viewAccommodation(accommodationId) {
-    // Navigate to accommodation booking page
-    window.location.href = `booking.html?accommodation=${accommodationId}`;
-  }
-
-  viewRestaurant(restaurantId) {
-    // Navigate to restaurant reservation page
-    window.location.href = `booking.html?restaurant=${restaurantId}`;
-  }
-
-  goToStep(step) {
-    // Update progress indicators
-    this.progressSteps.forEach((stepEl, index) => {
-      if (index + 1 < step) {
-        stepEl.classList.remove('active');
-        stepEl.classList.add('completed');
-      } else if (index + 1 === step) {
-        stepEl.classList.add('active');
-        stepEl.classList.remove('completed');
+    generateCustomBtn.addEventListener("click", () => {
+      const customText = customInput.value.trim();
+      if (customText) {
+        // Remove previous selection
+        document.querySelectorAll(".destination-option").forEach(opt => opt.classList.remove("selected"));
+        
+        this.selectedDestination = customText;
+        this.updateGenerateButton();
+        this.showToast(`Custom destination: ${customText}`, "success");
       } else {
-        stepEl.classList.remove('active', 'completed');
+        this.showToast("Please enter a destination description.", "error");
       }
     });
 
-    // Show/hide content sections
-    this.step1Content.style.display = step === 1 ? 'block' : 'none';
-    this.step2Content.style.display = step === 2 ? 'block' : 'none';
-    this.step3Content.style.display = step === 3 ? 'block' : 'none';
-
-    this.currentStep = step;
+    console.log("Custom destination setup complete");
   }
 
-  showToast(message, type = 'info') {
-    // Use existing toast functionality from components.js
-    if (window.showToast) {
-      window.showToast(message, type);
+  setupGenerateButton() {
+    console.log("Setting up generate button...");
+    const generateBtn = document.querySelector("#generate-ai-visual");
+    if (!generateBtn) {
+      console.error("Generate button not found");
+      return;
+    }
+
+    generateBtn.addEventListener("click", async () => {
+      if (!this.currentFile) {
+        this.showToast("Please upload a photo first.", "error");
+        return;
+      }
+
+      if (!this.selectedDestination) {
+        this.showToast("Please select a destination.", "error");
+        return;
+      }
+
+      await this.generateVisualization();
+    });
+
+    console.log("Generate button setup complete");
+  }
+
+  updateGenerateButton() {
+    const generateBtn = document.querySelector("#generate-ai-visual");
+    if (!generateBtn) return;
+
+    if (this.currentFile && this.selectedDestination) {
+      generateBtn.disabled = false;
+      generateBtn.classList.remove("btn-disabled");
     } else {
-      console.log(`${type.toUpperCase()}: ${message}`);
+      generateBtn.disabled = true;
+      generateBtn.classList.add("btn-disabled");
     }
   }
 
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  async generateVisualization() {
+    if (!this.currentFile || !this.selectedDestination) return;
+
+    const generateBtn = document.querySelector("#generate-ai-visual");
+    const originalText = generateBtn.innerHTML;
+    
+    try {
+      // Show loading state
+      generateBtn.innerHTML = `
+        <i class="fas fa-spinner fa-spin"></i>
+        Generating...
+      `;
+      generateBtn.disabled = true;
+
+      console.log("Starting AI generation for:", this.selectedDestination);
+
+      // Check if API is available
+      if (!this.api || typeof this.api.generateVisualization !== 'function') {
+        console.error("API not available or generateVisualization method missing");
+        console.log("API object:", this.api);
+        if (this.api) {
+          console.log("Available API methods:", Object.getOwnPropertyNames(Object.getPrototypeOf(this.api)));
+        }
+        throw new Error("API service not available. Please refresh the page.");
+      }
+
+      // Convert file to base64 for API
+      const imageUrl = await this.fileToBase64(this.currentFile);
+      
+      if (!imageUrl) {
+        throw new Error("Failed to process image");
+      }
+
+      console.log("Calling API with:", { imageUrl: imageUrl.substring(0, 100) + "...", destination: this.selectedDestination });
+
+      // Generate visualization
+      const response = await this.api.generateVisualization(
+        imageUrl,
+        null,
+        `Generate an image of a person at ${this.selectedDestination}`
+      );
+
+      if (response.success) {
+        this.showToast("Visualization generated successfully!", "success");
+        
+        // Show results
+        this.showGenerationResults(response.data);
+      } else {
+        throw new Error(response.error || "Failed to generate visualization");
+      }
+
+    } catch (error) {
+      console.error("Generation failed:", error);
+      this.showToast(
+        `Generation failed: ${error.message}`,
+        "error"
+      );
+    } finally {
+      // Reset button
+      generateBtn.innerHTML = originalText;
+      generateBtn.disabled = false;
+      this.updateGenerateButton();
+    }
   }
+
+  fileToBase64(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.onload = (e) => resolve(e.target.result);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  showGenerationResults(data) {
+    console.log("Showing generation results:", data);
+    console.log("Raw image_urls:", data.image_urls);
+    
+    // Create results modal or section
+    const resultsSection = document.createElement("div");
+    resultsSection.className = "generation-results";
+    resultsSection.innerHTML = `
+      <div class="results-header">
+        <h3>Your AI-Generated Visual</h3>
+        <p>Generated for: ${this.selectedDestination}</p>
+      </div>
+      <div class="results-grid">
+        ${this.renderGeneratedImages(data)}
+      </div>
+      <div class="results-actions">
+        <button class="btn btn-primary" onclick="window.location.href='visualizations.html'">
+          <i class="fas fa-images"></i>
+          View All My Trips
+        </button>
+        <button class="btn btn-secondary" onclick="this.closest('.generation-results').remove()">
+          <i class="fas fa-times"></i>
+          Close
+        </button>
+      </div>
+    `;
+
+    // Insert after upload section
+    const uploadSection = document.querySelector(".upload-section");
+    if (uploadSection) {
+      uploadSection.parentNode.insertBefore(resultsSection, uploadSection.nextSibling);
+      
+      // Scroll to results
+      resultsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
+
+  renderGeneratedImages(data) {
+    console.log("Rendering images with data:", data);
+    
+    // Check if we have image_urls from the API response
+    if (data && data.image_urls && data.image_urls.length > 0) {
+      console.log("Found", data.image_urls.length, "generated images");
+      console.log("Image URLs:", data.image_urls);
+      
+      return data.image_urls.map((imageUrl, index) => {
+        // Fix relative URLs to use the full backend domain
+        let fixedUrl = imageUrl;
+        if (imageUrl.startsWith('/static/')) {
+          fixedUrl = `https://travel-agent-backend-74fv.onrender.com${imageUrl}`;
+        } else if (imageUrl.includes('localhost:3000')) {
+          fixedUrl = imageUrl.replace('localhost:3000', 'https://travel-agent-backend-74fv.onrender.com');
+        }
+        console.log(`Image ${index + 1}: Original: ${imageUrl}, Fixed: ${fixedUrl}`);
+        
+        return `
+          <div class="generated-image-card">
+            <img src="${fixedUrl}" alt="Generated image ${index + 1}" class="generated-image" onerror="this.style.display='none'; this.nextElementSibling.innerHTML='<p style=&quot;color: red; padding: 1rem;&quot;>Image failed to load</p>'">
+            <div class="image-actions">
+              <button class="btn btn-small" onclick="window.uploadPage.downloadImage('${fixedUrl}', 'wanderai-${index + 1}.jpg')">
+                <i class="fas fa-download"></i>
+                Download
+              </button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+    
+    // Fallback for demo or when no images are returned
+    console.log("No images found, showing demo placeholder");
+    return `
+      <div class="generated-image-card">
+        <div class="demo-image-placeholder">
+          <i class="fas fa-image"></i>
+          <p>AI-generated image would appear here</p>
+        </div>
+        <div class="image-actions">
+          <button class="btn btn-small" onclick="alert('Demo image - no download available')">
+            <i class="fas fa-download"></i>
+            Demo Only
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  downloadImage(url, filename) {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+  showToast(message, type = "info") {
+    // Simple toast implementation
+    const toast = document.createElement("div");
+    toast.className = `toast toast-${type}`;
+    toast.innerHTML = `
+      <div class="toast-content">
+        <span>${message}</span>
+        <button onclick="this.parentElement.parentElement.remove()">×</button>
+      </div>
+    `;
+    
+    const container = document.getElementById("toast-container");
+    if (container) {
+      container.appendChild(toast);
+      
+      // Auto-remove after 5 seconds
+      setTimeout(() => {
+        if (toast.parentElement) {
+          toast.remove();
+        }
+      }, 5000);
+    }
+  }
+
+
 }
 
-// Initialize planning interface when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  window.planningInterface = new PlanningInterface();
+// Initialize when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("DOM loaded, initializing UploadPage...");
+  
+  // Check global availability
+  console.log("Global APIService:", typeof window.APIService);
+  console.log("Global APIService class:", window.APIService);
+  
+  if (typeof APIService === 'undefined') {
+    console.error("APIService is not available globally. Trying to wait for it...");
+    
+    // Wait a bit for scripts to load
+    setTimeout(() => {
+      console.log("After delay - APIService:", typeof APIService);
+      if (typeof APIService !== 'undefined') {
+        window.uploadPage = new UploadPage();
+      } else {
+        console.error("APIService still not available. Check script loading order.");
+        // Create a basic version without API
+        window.uploadPage = new UploadPage();
+      }
+    }, 1000);
+  } else {
+    window.uploadPage = new UploadPage();
+  }
 });
-
-// Export for global access
-window.PlanningInterface = PlanningInterface;
-
-

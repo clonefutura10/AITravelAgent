@@ -11,6 +11,7 @@ class RecommendationsPage {
     this.setupInterestCheckboxes();
     this.populateCountryDropdown();
     this.setupBookingForm();
+    this.setupBookingTabs();
   }
 
   setupEventListeners() {
@@ -392,7 +393,7 @@ class RecommendationsPage {
         overlay.style.display = 'flex';
         
         // Call OpenAI API to generate image
-        const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/generate-text-to-image`, {
+        const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/generate-text-to-image`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -446,19 +447,37 @@ class RecommendationsPage {
   handleDestinationSelect(dest) {
     console.log("Destination selected:", dest);
 
-    // Hide recommendations
-    const recommendationsResults = document.getElementById(
-      "recommendationsResults"
-    );
-    if (recommendationsResults) {
-      recommendationsResults.style.display = "none";
-    }
-
     // Store selected destination for booking
     this.selectedDestination = dest;
 
-    // Generate detailed itinerary first
-    this.generateDetailedItinerary(dest);
+    // Show the booking form section
+    this.showBookingForm(dest.name);
+  }
+
+  showBookingForm(destinationName) {
+    // Show the recommendations results section
+    const recommendationsResults = document.getElementById("recommendationsResults");
+    if (recommendationsResults) {
+      recommendationsResults.style.display = "block";
+    }
+
+    // Show the booking form section
+    const bookingFormSection = document.getElementById("bookingFormSection");
+    if (bookingFormSection) {
+      bookingFormSection.style.display = "block";
+      
+      // Pre-fill destination fields
+      const flightTo = document.getElementById('flight-to');
+      const hotelDestination = document.getElementById('hotel-destination');
+      
+      if (flightTo) flightTo.value = destinationName;
+      if (hotelDestination) hotelDestination.value = destinationName;
+    }
+
+    // Scroll to booking form
+    if (bookingFormSection) {
+      bookingFormSection.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
   async generateDetailedItinerary(dest) {
@@ -481,7 +500,7 @@ class RecommendationsPage {
       const userPrefs = this.getFormData();
 
       const response = await fetch(
-        `${window.API_BASE_URL || 'http://localhost:8001'}/api/generate-detailed-itinerary`,
+        `${window.API_BASE_URL || 'http://localhost:8000'}/api/generate-detailed-itinerary`,
         {
           method: "POST",
           headers: {
@@ -889,7 +908,7 @@ class RecommendationsPage {
     grid.innerHTML =
       '<div style="text-align:center;padding:30px;">Searching for flights...</div>';
     try {
-              const resp = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/search-bookings`, {
+              const resp = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/search-bookings`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(params),
@@ -960,6 +979,88 @@ class RecommendationsPage {
         this.performFlightSearch();
       };
     }
+  }
+
+  setupBookingTabs() {
+    const tabs = document.querySelectorAll('.booking-tab');
+    const contents = document.querySelectorAll('.booking-content');
+    
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetTab = tab.dataset.tab;
+        
+        // Remove active class from all tabs and contents
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        
+        // Add active class to clicked tab and corresponding content
+        tab.classList.add('active');
+        const targetContent = document.getElementById(`${targetTab}-tab`);
+        if (targetContent) {
+          targetContent.classList.add('active');
+        }
+      });
+    });
+
+    // Setup search buttons
+    const searchFlightsBtn = document.getElementById('searchFlights');
+    const searchHotelsBtn = document.getElementById('searchHotels');
+    
+    if (searchFlightsBtn) {
+      searchFlightsBtn.addEventListener('click', () => {
+        this.searchFlights();
+      });
+    }
+    
+    if (searchHotelsBtn) {
+      searchHotelsBtn.addEventListener('click', () => {
+        this.searchHotels();
+      });
+    }
+  }
+
+  searchFlights() {
+    const from = document.getElementById('flight-from').value;
+    const to = document.getElementById('flight-to').value;
+    const depart = document.getElementById('flight-depart').value;
+    const returnDate = document.getElementById('flight-return').value;
+    
+    if (!from || !to || !depart) {
+      uiComponents.showToast('Please fill in all required flight details.', 'error');
+      return;
+    }
+    
+    // Redirect to booking page with flight search
+    const params = new URLSearchParams({
+      tab: 'flights',
+      from: from,
+      to: to,
+      depart: depart,
+      return: returnDate
+    });
+    
+    window.location.href = `booking.html?${params.toString()}`;
+  }
+
+  searchHotels() {
+    const destination = document.getElementById('hotel-destination').value;
+    const checkin = document.getElementById('hotel-checkin').value;
+    const checkout = document.getElementById('hotel-checkout').value;
+    
+    if (!destination || !checkin || !checkout) {
+      uiComponents.showToast('Please fill in all required hotel details.', 'error');
+      return;
+    }
+    
+    // Redirect to booking page with hotel search
+    const params = new URLSearchParams({
+      tab: 'hotels',
+      destination: destination,
+      checkin: checkin,
+      checkout: checkout
+      });
+    
+    window.location.href = `booking.html?${params.toString()}`;
   }
 
   initializeDatePickers() {
@@ -1221,7 +1322,7 @@ class RecommendationsPage {
       const searchData = this.getFlightSearchData();
       console.log("Flight search data:", searchData);
 
-              const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/search-flights`, {
+              const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/search-flights`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -1692,7 +1793,7 @@ class RecommendationsPage {
         currency: "USD",
       };
 
-              const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8001'}/api/book`, {
+              const response = await fetch(`${window.API_BASE_URL || 'http://localhost:8000'}/api/book`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

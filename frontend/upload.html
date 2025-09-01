@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI-Generated Visuals - WanderAI</title>
+    <title>AI-Powered Visuals - WanderAI</title>
     <meta
       name="description"
-      content="See yourself at world-renowned landmarks with AI-generated visuals. Upload a photo and instantly see yourself at the Eiffel Tower, Bali beaches, Machu Picchu, and more."
+      content="Upload a photo and generate AI-powered visuals of yourself at world-famous landmarks with WanderAI."
     />
 
     <!-- Fonts -->
@@ -24,14 +24,12 @@
     />
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style.css?v=1004" />
     
     <!-- API Configuration -->
     <script>
-      // Use localhost for development, production URL for deployed version
-      window.API_BASE_URL = window.location.hostname === 'localhost' 
-        ? 'http://localhost:8000' 
-        : 'https://travel-agent-backend-74fv.onrender.com';
+      // Set API base URL for production/development
+      window.API_BASE_URL = 'https://travel-agent-backend-74fv.onrender.com';
     </script>
   </head>
   <body>
@@ -42,22 +40,25 @@
           <a href="index.html" class="logo-link">
             <div class="logo-icon">
               <i class="fas fa-compass"></i>
-              <div class="logo-dot"></div>
             </div>
             <div class="logo-text">
               <span class="logo-title">WanderAI</span>
-              <div class="logo-subtitle">Your Travel Companion</div>
+              <div class="logo-subtitle">Your AI Travel Companion</div>
             </div>
           </a>
         </div>
 
         <div class="nav-menu" id="nav-menu">
           <a href="upload.html" class="nav-link active">
-            <i class="fas fa-camera"></i>
+            <i class="fas fa-sparkles"></i>
             <span>AI Visuals</span>
           </a>
+          <a href="destinations.html" class="nav-link">
+            <i class="fas fa-globe"></i>
+            <span>Destinations</span>
+          </a>
           <a href="recommendations.html" class="nav-link">
-            <i class="fas fa-magic"></i>
+            <i class="fas fa-rotate"></i>
             <span>Get Recommendations</span>
           </a>
           <a href="booking.html" class="nav-link">
@@ -65,7 +66,7 @@
             <span>Book Travel</span>
           </a>
           <a href="visualizations.html" class="nav-link">
-            <i class="fas fa-images"></i>
+            <i class="fas fa-file-alt"></i>
             <span>My Trips</span>
           </a>
         </div>
@@ -78,24 +79,25 @@
 
     <!-- Main Content -->
     <main class="main-content">
-      <div class="container">
-        <!-- Hero Section -->
-        <section class="hero-section">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-scenic-bg"></div>
+        <div class="container">
           <div class="hero-content">
             <div class="hero-badge">
-              <i class="fas fa-robot"></i>
+              <i class="fas fa-sparkles"></i>
               <span>AI-Powered Visuals</span>
             </div>
 
             <h1 class="hero-title">
-              See Yourself at
-              <span class="gradient-text">World-Famous Landmarks</span>
+              See Yourself at <span class="gradient-text">World-Famous Landmarks</span>
             </h1>
 
             <p class="hero-description">
-              Upload a photo and instantly see AI-generated visuals of yourself at the Eiffel Tower, pristine beaches of Bali, historic ruins of Machu Picchu, and more iconic destinations around the world.
+              Upload a photo and instantly generate AI-generated visuals of yourself at the Eiffel Tower, pristine beaches of Bali, historic ruins of Machu Picchu, and more iconic destinations around the world.
             </p>
 
+            <!-- Stats -->
             <div class="hero-stats">
               <div class="stat-item">
                 <div class="stat-number">50+</div>
@@ -111,244 +113,101 @@
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Photo Upload Section -->
-        <section class="upload-section">
-          <div class="upload-card">
-            <div class="upload-header">
-              <h2 class="upload-title">
-                <i class="fas fa-camera"></i>
-                Upload Your Photo
-              </h2>
-              <p class="upload-description">
-                Upload a clear photo of yourself and choose a destination. Our AI will generate realistic visuals of you at that location.
+      <!-- Upload Section -->
+      <section class="upload-section">
+        <div class="container">
+          <div class="section-header">
+            <h2 class="section-title">
+              <i class="fas fa-camera"></i>
+              Upload Your Photo
+            </h2>
+            <p class="section-description">
+              Upload a clear photo of yourself and choose a destination. Our AI will generate realistic visuals of you at that location.
+            </p>
+          </div>
+
+          <div class="upload-grid">
+            <div class="photo-upload" id="photo-upload">
+              <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+              </div>
+              <h3 class="upload-heading">Drop your photo here</h3>
+              <p class="upload-subtext">
+                <a href="javascript:void(0)" id="browse-link">or click to browse</a>
               </p>
+              <p class="upload-note">Supports JPG, PNG, WEBP (max 10MB)</p>
             </div>
 
-            <div class="upload-area">
-              <div class="upload-zone" id="upload-zone">
-                <div class="upload-content">
-                  <i class="fas fa-cloud-upload-alt"></i>
-                  <h4>Drop your photo here</h4>
-                  <p>or click to browse</p>
-                  <span class="upload-hint">Supports JPG, PNG, WebP (max 10MB)</span>
-                </div>
-                <input type="file" id="photo-input" accept="image/*" style="display: none;" />
-              </div>
-              
-              <div class="uploaded-photo" id="uploaded-photo" style="display: none;">
-                <img id="photo-preview" src="" alt="Uploaded photo" />
-                <button class="btn btn-secondary btn-small" id="change-photo-btn">
-                  <i class="fas fa-edit"></i>
-                  Change Photo
-                </button>
-              </div>
-            </div>
-
-            <!-- Destination Selection -->
             <div class="destination-selection">
-              <h3 class="destination-title">
+              <h3 class="upload-heading">
                 <i class="fas fa-map-marker-alt"></i>
                 Choose Your Destination
               </h3>
               
-              <div class="destinations-grid" id="destinations-grid">
-                <div class="destination-card" data-destination="Eiffel Tower, Paris, France">
-                  <div class="destination-image">
-                    <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=400&h=300&fit=crop" alt="Eiffel Tower" />
-                  </div>
-                  <div class="destination-info">
-                    <h4>Eiffel Tower</h4>
-                    <p>Paris, France</p>
-                  </div>
+              <div class="destination-grid">
+                <div class="destination-option" data-destination="Paris, France">
+                  <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=100&h=100&fit=crop" alt="Eiffel Tower">
+                  <span>Paris, France</span>
                 </div>
-
-                <div class="destination-card" data-destination="Bali Beach, Indonesia">
-                  <div class="destination-image">
-                    <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=400&h=300&fit=crop" alt="Bali Beach" />
-                  </div>
-                  <div class="destination-info">
-                    <h4>Bali Beaches</h4>
-                    <p>Indonesia</p>
-                  </div>
+                <div class="destination-option" data-destination="Bali, Indonesia">
+                  <img src="https://images.unsplash.com/photo-1539367620248-64bc5a7669a7?w=100&h=100&fit=crop" alt="Bali Beaches">
+                  <span>Bali, Indonesia</span>
                 </div>
-
-                <div class="destination-card" data-destination="Machu Picchu, Peru">
-                  <div class="destination-image">
-                    <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=400&h=300&fit=crop" alt="Machu Picchu" />
-                  </div>
-                  <div class="destination-info">
-                    <h4>Machu Picchu</h4>
-                    <p>Peru</p>
-                  </div>
+                <div class="destination-option" data-destination="Machu Picchu, Peru">
+                  <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=100&h=100&fit=crop" alt="Machu Picchu">
+                  <span>Machu Picchu, Peru</span>
                 </div>
-
-                <div class="destination-card" data-destination="Taj Mahal, Agra, India">
-                  <div class="destination-image">
-                    <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=400&h=300&fit=crop" alt="Taj Mahal" />
-                  </div>
-                  <div class="destination-info">
-                    <h4>Taj Mahal</h4>
-                    <p>Agra, India</p>
-                  </div>
+                <div class="destination-option" data-destination="Taj Mahal, India">
+                  <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?w=100&h=100&fit=crop" alt="Taj Mahal">
+                  <span>Taj Mahal, India</span>
                 </div>
-
-                <div class="destination-card" data-destination="Santorini, Greece">
-                  <div class="destination-image">
-                    <img src="https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=400&h=300&fit=crop" alt="Santorini" />
-                  </div>
-                  <div class="destination-info">
-                    <h4>Santorini</h4>
-                    <p>Greece</p>
-                  </div>
+                <div class="destination-option" data-destination="Santorini, Greece">
+                  <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=100&h=100&fit=crop" alt="Santorini">
+                  <span>Santorini, Greece</span>
                 </div>
-
-                <div class="destination-card" data-destination="Mount Fuji, Japan">
-                  <div class="destination-image">
-                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Mount Fuji" />
-                  </div>
-                  <div class="destination-info">
-                    <h4>Mount Fuji</h4>
-                    <p>Japan</p>
-                  </div>
+                <div class="destination-option" data-destination="Mount Fuji, Japan">
+                  <img src="https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=100&h=100&fit=crop" alt="Mount Fuji">
+                  <span>Mount Fuji, Japan</span>
                 </div>
-
-                <div class="destination-card" data-destination="Burj Khalifa, Dubai, UAE">
-                  <div class="destination-image">
-                    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=400&h=300&fit=crop" alt="Burj Khalifa" />
-                  </div>
-                  <div class="destination-info">
-                    <h4>Burj Khalifa</h4>
-                    <p>Dubai, UAE</p>
-                  </div>
+                <div class="destination-option" data-destination="Dubai, UAE">
+                  <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=100&h=100&fit=crop" alt="Burj Khalifa">
+                  <span>Dubai, UAE</span>
                 </div>
-
-                <div class="destination-card" data-destination="Times Square, New York, USA">
-                  <div class="destination-image">
-                    <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=400&h=300&fit=crop" alt="Times Square" />
-                  </div>
-                  <div class="destination-info">
-                    <h4>Times Square</h4>
-                    <p>New York, USA</p>
-                  </div>
+                <div class="destination-option" data-destination="New York, USA">
+                  <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?w=100&h=100&fit=crop" alt="Times Square">
+                  <span>New York, USA</span>
                 </div>
               </div>
 
               <div class="custom-destination">
-                <h4>Or describe your own destination:</h4>
-                <div class="custom-input-group">
-                  <input type="text" id="custom-destination" placeholder="e.g., Standing in front of the Colosseum in Rome" />
-                  <button class="btn btn-primary" id="use-custom-btn">
-                    <i class="fas fa-magic"></i>
-                    Generate
-                  </button>
-                </div>
+                <p>Or describe your own destination:</p>
+                <input type="text" id="custom-destination" placeholder="e.g., Standing in front of the Colosseum in Rome">
+                <button class="btn btn-primary" id="generate-custom">
+                  <i class="fas fa-paper-plane"></i>
+                  Generate
+                </button>
               </div>
-            </div>
 
-            <!-- Generate Button -->
-            <div class="generate-section">
-              <button class="btn btn-primary btn-large" id="generate-btn" disabled>
-                <i class="fas fa-magic"></i>
+              <button class="btn btn-primary btn-large" id="generate-ai-visual" disabled>
+                <i class="fas fa-sparkles"></i>
                 Generate AI Visual
-                <i class="fas fa-arrow-right"></i>
               </button>
-              <p class="generate-hint">
+              
+              <div class="info-note">
                 <i class="fas fa-info-circle"></i>
                 Our AI will create a realistic image of you at your chosen destination
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- Loading Section -->
-        <section class="loading-section" id="loading-section" style="display: none;">
-          <div class="loading-card">
-            <div class="loading-content">
-              <div class="loading-spinner">
-                <i class="fas fa-magic"></i>
-              </div>
-              <h3>Generating Your AI Visual</h3>
-              <p>Our AI is creating a realistic image of you at your chosen destination...</p>
-              <div class="loading-progress">
-                <div class="progress-bar">
-                  <div class="progress-fill" id="progress-fill"></div>
-                </div>
-                <div class="progress-steps">
-                  <div class="progress-step-item active">
-                    <i class="fas fa-image"></i>
-                    <span>Processing photo</span>
-                  </div>
-                  <div class="progress-step-item">
-                    <i class="fas fa-globe"></i>
-                    <span>Analyzing destination</span>
-                  </div>
-                  <div class="progress-step-item">
-                    <i class="fas fa-magic"></i>
-                    <span>Generating visual</span>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <!-- Results Section -->
-        <section class="results-section" id="results-section" style="display: none;">
-          <div class="results-card">
-            <div class="results-header">
-              <h2 class="results-title">
-                <i class="fas fa-star"></i>
-                Your AI-Generated Visual
-              </h2>
-              <p class="results-description">
-                Here's how you look at your chosen destination!
-              </p>
-            </div>
-
-            <div class="results-content">
-              <div class="result-image-container">
-                <img id="result-image" src="" alt="AI Generated Visual" />
-                <div class="result-overlay">
-                  <button class="btn btn-white" id="download-btn">
-                    <i class="fas fa-download"></i>
-                    Download
-                  </button>
-                  <button class="btn btn-secondary" id="share-btn">
-                    <i class="fas fa-share"></i>
-                    Share
-                  </button>
-                </div>
-              </div>
-
-              <div class="result-info">
-                <div class="result-destination">
-                  <h4>Destination</h4>
-                  <p id="result-destination-text"></p>
-                </div>
-                <div class="result-prompt">
-                  <h4>Generated Prompt</h4>
-                  <p id="result-prompt-text"></p>
-                </div>
-              </div>
-            </div>
-
-            <div class="results-actions">
-              <button class="btn btn-primary btn-large" id="generate-another-btn">
-                <i class="fas fa-plus"></i>
-                Generate Another
-              </button>
-              <a href="booking.html" class="btn btn-secondary btn-large">
-                <i class="fas fa-plane"></i>
-                Book This Trip
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <!-- Examples Section -->
-        <section class="examples-section">
+      <!-- Sample Outputs Section -->
+      <section class="sample-outputs">
+        <div class="container">
           <div class="section-header">
             <h2 class="section-title">See What's Possible</h2>
             <p class="section-description">
@@ -356,33 +215,33 @@
             </p>
           </div>
 
-          <div class="examples-grid">
-            <div class="example-card">
-              <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=400&h=300&fit=crop" alt="Eiffel Tower Example" />
-              <div class="example-info">
-                <h4>Eiffel Tower, Paris</h4>
+          <div class="sample-outputs-grid">
+            <div class="sample-output-card">
+              <img src="https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?w=400&h=300&fit=crop" alt="Eiffel Tower, Paris" class="sample-output-image">
+              <div class="sample-output-content">
+                <h3>Eiffel Tower, Paris</h3>
                 <p>Standing in front of the iconic Iron Lady</p>
               </div>
             </div>
 
-            <div class="example-card">
-              <img src="https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=400&h=300&fit=crop" alt="Bali Beach Example" />
-              <div class="example-info">
-                <h4>Bali Beaches, Indonesia</h4>
+            <div class="sample-output-card">
+              <img src="https://images.unsplash.com/photo-1539367620248-64bc5a7669a7?w=400&h=300&fit=crop" alt="Bali Beaches, Indonesia" class="sample-output-image">
+              <div class="sample-output-content">
+                <h3>Bali Beaches, Indonesia</h3>
                 <p>Relaxing on pristine tropical beaches</p>
               </div>
             </div>
 
-            <div class="example-card">
-              <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=400&h=300&fit=crop" alt="Machu Picchu Example" />
-              <div class="example-info">
-                <h4>Machu Picchu, Peru</h4>
+            <div class="sample-output-card">
+              <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=400&h=300&fit=crop" alt="Machu Picchu, Peru" class="sample-output-image">
+              <div class="sample-output-content">
+                <h3>Machu Picchu, Peru</h3>
                 <p>Exploring ancient Incan ruins</p>
               </div>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </main>
 
     <!-- Footer -->
@@ -402,13 +261,16 @@
       </div>
     </footer>
 
+    <!-- Hidden File Inputs -->
+    <input type="file" id="file-input" accept="image/*" style="display: none" />
+
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container"></div>
 
     <!-- Scripts -->
-    <script src="js/api.js"></script>
+    <script src="js/api.js?v=1008"></script>
     <script src="js/components.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/ai-visuals.js"></script>
+    <script src="js/upload.js?v=1003"></script>
   </body>
 </html>

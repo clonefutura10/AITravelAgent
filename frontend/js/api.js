@@ -1,11 +1,13 @@
 // Simple API Service with Fallback Data
 class APIService {
   constructor() {
-    // Set the backend URL - change this to your actual backend URL
-    this.baseURL = "http://localhost:8001/api";
+    // Use environment variable if available, otherwise fallback to localhost for development
+    this.baseURL = window.API_BASE_URL ? `${window.API_BASE_URL}/api` : "http://localhost:8000/api";
     
-    // For production, you might want to use:
-    // this.baseURL = "https://your-backend-domain.com/api";
+    // Debug: Log available methods
+    console.log("APIService constructor called");
+    console.log("Available methods:", Object.getOwnPropertyNames(Object.getPrototypeOf(this)));
+    console.log("generateVisualization method:", typeof this.generateVisualization);
   }
 
   async checkBackendHealth() {
@@ -60,6 +62,75 @@ class APIService {
     } catch (error) {
       console.error("Failed to fetch destinations:", error);
       return this.getMockDestinations();
+    }
+  }
+
+  // Get all visualizations
+  async getVisualizations(limit = 20) {
+    try {
+      const response = await fetch(`${this.baseURL}/visualizations?limit=${limit}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        return { success: true, data: data };
+      } else {
+        throw new Error("Failed to fetch visualizations");
+      }
+    } catch (error) {
+      console.error("Failed to fetch visualizations:", error);
+      return { success: false, data: [] };
+    }
+  }
+
+  // Generate visualization
+  async generateVisualization(userPhotoUrl, destinationId = null, prompt = null) {
+    console.log("generateVisualization method called with:", { userPhotoUrl: userPhotoUrl?.substring(0, 50) + "...", destinationId, prompt });
+    
+    try {
+      // Convert base64 to blob for file upload
+      const base64Data = userPhotoUrl.split(',')[1]; // Remove data URL prefix
+      const byteCharacters = atob(base64Data);
+      const byteNumbers = new Array(byteCharacters.length);
+      for (let i = 0; i < byteCharacters.length; i++) {
+        byteNumbers[i] = byteCharacters.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob = new Blob([byteArray], { type: 'image/jpeg' });
+      
+      // Create FormData for file upload
+      const formData = new FormData();
+      formData.append('selfie', blob, 'photo.jpg');
+      formData.append('prompt', prompt || "");
+      
+      if (destinationId) formData.append('destination_id', destinationId);
+
+      console.log("Making API call to:", `${this.baseURL}/generate-photo-app-image`);
+      console.log("FormData entries:");
+      for (let [key, value] of formData.entries()) {
+        console.log(`${key}:`, typeof value === 'string' ? value : `Blob(${value.size} bytes)`);
+      }
+
+      const response = await fetch(`${this.baseURL}/generate-photo-app-image`, {
+        method: "POST",
+        body: formData, // Send as FormData, not JSON
+      });
+      
+      console.log("API response status:", response.status);
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log("API response success:", result);
+        return { success: true, data: result };
+      } else {
+        const errorText = await response.text();
+        console.error("API response error:", errorText);
+        throw new Error("Failed to generate visualization");
+      }
+    } catch (error) {
+      console.error("Failed to generate visualization:", error);
+      return { success: false, error: error.message };
     }
   }
 
@@ -134,7 +205,7 @@ class APIService {
             description:
               "Frozen continent of pristine wilderness and scientific research",
             visual_theme: "ice and snow landscapes",
-          },
+            },
         ],
       };
     }
@@ -581,3 +652,6 @@ class APIService {
     }
   }
 }
+
+// Make APIService available globally
+window.APIService = APIService;
